@@ -69,6 +69,7 @@ function chessPiecesColorFn(chessPiecesColor) {
   chessPieces.forEach(
     (item) => {
       item.onclick = () => {
+
         if (item.className !== "chessPieces") {
           return;
         }
@@ -78,60 +79,98 @@ function chessPiecesColorFn(chessPiecesColor) {
         } else if (chessPiecesColor === 'black') {
           chessPiecesColor = 'White';
         }
+        pd();
       }
     }
   )
 }
 
 
-// 给每个棋子标号码
-
 /*
   判断输赢 
   @游戏规则
 */
-// 横着赢法
+// 每一列的赢法
 function gameRule() {
-
   let wins = [];
   // 有多少种方法
   let winsNums = [];
   let winsNum = 0;
-  let rowNum = 0;
-
-  // 每一行的赢法赢法
-  let colArr = [];
-  let rowArr = [];
-
   for (let col = 0; col < 16; col++) {
-
     for (let row = 0; row < 16; row++) {
-
-      colArr[row] = [];
-
-      for (let index = rowNum; index < (rowNum+5); index++) {
-        console.log("index",index)
-        console.log("rowNum",rowNum)
-        colArr[row].push(winsNum);
-
+      let lsWinsNum = winsNum;
+      wins[winsNum] = [];
+      for (let index = 0; index < 5; index++) {
+        wins[winsNum].push(lsWinsNum);
+        lsWinsNum++;
       }
-
       winsNums.push(winsNum++);
     }
-
-    wins.push(colArr);
-
   }
-
-  console.log(wins)
-
+  wins.splice(-4, 4)
   return wins;
 }
+
+// 判断输赢，
+function setGameRule() {
+  // 获取所有的棋子节点
+  const chessPieces = theBoard.querySelectorAll(".chessPieces");
+  let node = [];
+  let num = 0
+  for (let col = 0; col < 16; col++) {
+    for (let row = 0; row < 16; row++) {
+      if (chessPieces[num].className === "chessPieces White") {
+        node[num] = 1;
+      } else if (chessPieces[num].className === "chessPieces black") {
+        node[num] = 2;
+      } else if (chessPieces[num].className === "chessPieces") {
+        node[num] = null;
+      }
+      num++
+    }
+  }
+  return node;
+}
+
+
+//在数组中查找所有出现的x，并返回一个包含匹配索引的数组
+function findall(a, x) {
+  var results = [],
+    len = a.length,
+    pos = 0;
+  while (pos < len) {
+    pos = a.indexOf(x, pos);
+    if (pos === -1) {//未找到就退出循环完成搜索
+      break;
+    }
+    results.push(pos);//找到就存储索引
+    pos += 1;//并从下个位置开始搜索
+  }
+  return results;
+}
+
+
+function pd() {
+  let a = setGameRule();
+  let b = gameRule();
+  let WhiteChessPieces = findall(a, 1);
+  let blackChessPieces = findall(a, 2);
+  for (let index = 0; index < gameRule().length; index++) {
+    if (WhiteChessPieces.join("|").includes(b[index].join("|"))) {
+      alert("白子赢了");
+      return
+    } else if (blackChessPieces.join("|").includes(b[index].join("|"))) {
+      alert("黑子赢了");
+      return
+    }
+  }
+}
+
 
 // 绘制棋盘
 theBoardFn();
 // 绘制棋子
-chessPiecesFn()
+chessPiecesFn();
 
 /*
   改变棋子颜色
@@ -139,8 +178,8 @@ chessPiecesFn()
 */
 chessPiecesColorFn("White");
 
-
 gameRule();
 
+
 // 定时器
-console.timeEnd("time")
+console.timeEnd("time");
