@@ -13,8 +13,19 @@
 */
 console.time("time")
 
+// 判断游戏是否进行中
+let Game = true;
+
+const game = document.getElementsByClassName("game")[0];
 const theBoard = document.getElementsByClassName("theBoard")[0];
 const theBoardLi = [];
+
+
+
+
+/*
+  绘制棋盘
+*/
 function theBoardFn() {
   let newUl;
   for (let index = 0; index < 16; index++) {
@@ -60,17 +71,16 @@ function chessPiecesFn() {
 
 
 /* 
-  改变棋子颜色
+  下棋反馈改变棋子颜色
 */
-
 function chessPiecesColorFn(chessPiecesColor) {
   // 获取所有的棋子节点
   const chessPieces = theBoard.querySelectorAll(".chessPieces");
   chessPieces.forEach(
     (item) => {
       item.onclick = () => {
-
-        if (item.className !== "chessPieces") {
+        // 判断棋子和游戏是否存在
+        if (item.className !== "chessPieces" || !Game) {
           return;
         }
         item.classList.add(chessPiecesColor)
@@ -79,7 +89,8 @@ function chessPiecesColorFn(chessPiecesColor) {
         } else if (chessPiecesColor === 'black') {
           chessPiecesColor = 'White';
         }
-        pd();
+        // 每次下棋都会判断是否胜利
+        JudgeSuccess();
       }
     }
   )
@@ -107,12 +118,35 @@ function gameRule() {
       winsNums.push(winsNum++);
     }
   }
-  wins.splice(-4, 4)
+  winsNums = [];
+  winsNum = 0;
+  wins.splice(-4, 4);
   return wins;
 }
 
-// 判断输赢，
-function setGameRule() {
+
+// 查找指定数组中的值，返回所查找到结果的数组
+function ToFindThe(arr, value) {
+  // 存放结果
+  let nawArr = [];
+  // 存放从迪哥开始查找的值
+  let pos = 0;
+  while (pos < arr.length) {
+    pos = arr.indexOf(value, pos);
+    if (pos === -1) {  // 没有结果退出循环
+      break;
+    }
+    nawArr.push(pos);
+    pos++;
+  }
+  return nawArr;
+}
+
+
+/*
+  判断胜利并触发事件
+*/
+function JudgeSuccess() {
   // 获取所有的棋子节点
   const chessPieces = theBoard.querySelectorAll(".chessPieces");
   let node = [];
@@ -129,48 +163,31 @@ function setGameRule() {
       num++
     }
   }
-  return node;
-}
 
-
-//在数组中查找所有出现的x，并返回一个包含匹配索引的数组
-function findall(a, x) {
-  var results = [],
-    len = a.length,
-    pos = 0;
-  while (pos < len) {
-    pos = a.indexOf(x, pos);
-    if (pos === -1) {//未找到就退出循环完成搜索
-      break;
-    }
-    results.push(pos);//找到就存储索引
-    pos += 1;//并从下个位置开始搜索
-  }
-  return results;
-}
-
-
-function pd() {
-  let a = setGameRule();
-  let b = gameRule();
-  let WhiteChessPieces = findall(a, 1);
-  let blackChessPieces = findall(a, 2);
+  // 白字的数组
+  let WhiteChessPieces = ToFindThe(node, 1);
+  // 黑子的数组
+  let blackChessPieces = ToFindThe(node, 2);
   for (let index = 0; index < gameRule().length; index++) {
-    if (WhiteChessPieces.join("|").includes(b[index].join("|"))) {
-      alert("白子赢了");
-      return
-    } else if (blackChessPieces.join("|").includes(b[index].join("|"))) {
-      alert("黑子赢了");
-      return
+    if (WhiteChessPieces.join("|").includes(gameRuleValue[index].join("|"))) {
+      Game = false;
+      alert("白子胜利");
+      return;
+    } else if (blackChessPieces.join("|").includes(gameRuleValue[index].join("|"))) {
+      Game = false;
+      alert("黑子胜利");
+      return;
     }
   }
 }
-
 
 // 绘制棋盘
 theBoardFn();
 // 绘制棋子
 chessPiecesFn();
+
+// 有多少种赢法,初始化加载赢的方法
+let gameRuleValue = gameRule();
 
 /*
   改变棋子颜色
@@ -178,6 +195,7 @@ chessPiecesFn();
 */
 chessPiecesColorFn("White");
 
+// 下棋事件
 gameRule();
 
 
