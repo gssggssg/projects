@@ -1,0 +1,60 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+li{
+  list-style: none;
+}
+
+body{
+  background-color: #c4d7d6;
+}
+.content{
+  width: 780px;
+  height: 780px;
+  box-shadow: 4px 4px 10px 2px #134857;
+  border-radius: 12px;
+  margin: 100px auto;
+  background-color: #158bb8;
+  padding: 40px;
+}
+
+.theBoard{
+  display: flex;
+}
+
+.theBoard li{
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(51, 51, 51, 0.185);
+  position: relative;
+  border-radius: 8px;
+}
+
+/*
+  棋子
+*/
+.chessPieces{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top: -21px;
+  left: -21px;
+}
+
+.black{
+  background-color: #000;
+  box-shadow: 3px 3px 4px 1px rgb(2 71 108);
+}
+
+.White{
+  background-color: #fff;
+  box-shadow: 3px 3px 4px 1px rgb(2 71 108);
+}
+
+
+.segmentation{
+  float: left;
+}
