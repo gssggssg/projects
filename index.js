@@ -103,16 +103,27 @@ function chessPiecesColorFn(chessPiecesColor) {
 */
 // 每一列的赢法
 function gameRule() {
+
+  // 一共有多少种胜利方法
   let wins = [];
+
   // 有多少种方法
   let winsNums = [];
+
+  // 
   let winsNum = 0;
-  for (let col = 0; col < 16; col++) {
-    for (let row = 0; row < 16; row++) {
+
+  // 每一列胜利的方法
+  for (let col = 0; col < 16; col++) {  // 列
+    for (let row = 0; row < 16; row++) {  // 行
       let lsWinsNum = winsNum;
       wins[winsNum] = [];
       for (let index = 0; index < 5; index++) {
-        wins[winsNum].push(lsWinsNum);
+        if ((col * 16 + 0) <= winsNum && winsNum < (col * 16 + 12)) {
+          wins[winsNum].push(lsWinsNum);
+        } else {
+          break;
+        }
         lsWinsNum++;
       }
       winsNums.push(winsNum++);
@@ -121,6 +132,28 @@ function gameRule() {
   winsNums = [];
   winsNum = 0;
   wins.splice(-4, 4);
+
+  // 每一行胜利的方法
+  for (let index1 = 0; index1 < 16; index1++) { // 每一列
+    for (let index = 0; index < 256; index += 16) { // 每一行
+      winsNums[winsNum] = [];
+      for (let index2 = 0; index2 < 5; index2++) {
+        if ((index + index1) + index2 * 16 < 225) {
+          winsNums[winsNum].push((index + index1) + index2 * 16)
+        } else {
+          break;
+        }
+      }
+      wins.push(winsNums[winsNum]);
+      winsNum++
+    }
+  }
+  winsNums = [];
+  winsNum = 0;
+
+  wins = wins.filter(
+    (item) => { return item.length === 5 }
+  )
   return wins;
 }
 
@@ -168,12 +201,13 @@ function JudgeSuccess() {
   let WhiteChessPieces = ToFindThe(node, 1);
   // 黑子的数组
   let blackChessPieces = ToFindThe(node, 2);
-  for (let index = 0; index < gameRule().length; index++) {
+  for (let index = 0; index < gameRuleValue.length; index++) {
     if (WhiteChessPieces.join("|").includes(gameRuleValue[index].join("|"))) {
       Game = false;
       alert("白子胜利");
       return;
-    } else if (blackChessPieces.join("|").includes(gameRuleValue[index].join("|"))) {
+    }
+    if (blackChessPieces.join("|").includes(gameRuleValue[index].join("|"))) {
       Game = false;
       alert("黑子胜利");
       return;
@@ -195,8 +229,6 @@ let gameRuleValue = gameRule();
 */
 chessPiecesColorFn("White");
 
-// 下棋事件
-gameRule();
 
 
 // 定时器
