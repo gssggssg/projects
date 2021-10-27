@@ -1,6 +1,7 @@
 *{
   padding: 0;
   margin: 0;
+  transition: all 0.4s cubic-bezier(0.71, 1.14, 0.89, 0.96);
 }
 
 li{
@@ -11,8 +12,8 @@ body{
   background-color: #c4d7d6;
 }
 .content{
-  width: 780px;
-  height: 780px;
+  width: 728px;
+  height: 728px;
   box-shadow: 4px 4px 10px 2px #134857;
   border-radius: 12px;
   margin: 100px auto;

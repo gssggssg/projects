@@ -16,11 +16,11 @@ console.time("time")
 // 判断游戏是否进行中
 let Game = true;
 
-const game = document.getElementsByClassName("game")[0];
+// 棋盘的节点
 const theBoard = document.getElementsByClassName("theBoard")[0];
+
+// 棋盘上的棋格节点
 const theBoardLi = [];
-
-
 
 
 /*
@@ -28,10 +28,10 @@ const theBoardLi = [];
 */
 function theBoardFn() {
   let newUl;
-  for (let index = 0; index < 16; index++) {
+  for (let index = 0; index < 15; index++) {
     // 创建一个 ul 节点
     newUl = document.createElement("ul");
-    for (let index1 = 0; index1 < 16; index1++) {
+    for (let index1 = 0; index1 < 15; index1++) {
       // 将li插入到 ul 中
       newUl.appendChild(document.createElement("li"));
     }
@@ -48,9 +48,9 @@ function theBoardFn() {
   }
 
   // 添加最右边和最下边的 li 边框看不见
-  for (let index = 0; index < theBoardUl.length; index++) {
-    theBoardLi[index][15].style.border = "none";
-    theBoardLi[15][index].style.border = "1px solid transparent";
+  for (let index = 0; index < 15; index++) {
+    theBoardLi[index][14].style.border = "1px solid transparent";
+    theBoardLi[14][index].style.border = "1px solid transparent";
   }
 }
 
@@ -60,8 +60,8 @@ function theBoardFn() {
 */
 function chessPiecesFn() {
   let newDiv;
-  for (let index = 0; index < 16; index++) {
-    for (let index1 = 0; index1 < 16; index1++) {
+  for (let index = 0; index < 15; index++) {
+    for (let index1 = 0; index1 < 15; index1++) {
       newDiv = document.createElement("div")
       newDiv.className = "chessPieces";
       theBoardLi[index][index1].appendChild(newDiv);
@@ -114,12 +114,12 @@ function gameRule() {
   let winsNum = 0;
 
   // 每一列胜利的方法
-  for (let col = 0; col < 16; col++) {  // 列
-    for (let row = 0; row < 16; row++) {  // 行
+  for (let col = 0; col < 15; col++) {  // 列
+    for (let row = 0; row < 15; row++) {  // 行
       let lsWinsNum = winsNum;
       wins[winsNum] = [];
       for (let index = 0; index < 5; index++) {
-        if ((col * 16 + 0) <= winsNum && winsNum < (col * 16 + 12)) {
+        if ((col * 15 + 0) <= winsNum && winsNum < (col * 15 + 11)) {
           wins[winsNum].push(lsWinsNum);
         } else {
           break;
@@ -129,17 +129,18 @@ function gameRule() {
       winsNums.push(winsNum++);
     }
   }
+
   winsNums = [];
   winsNum = 0;
   wins.splice(-4, 4);
 
   // 每一行胜利的方法
-  for (let index1 = 0; index1 < 16; index1++) { // 每一列
-    for (let index = 0; index < 256; index += 16) { // 每一行
+  for (let index1 = 0; index1 < 15; index1++) { // 每一列
+    for (let index = 0; index < 226; index += 15) { // 每一行
       winsNums[winsNum] = [];
       for (let index2 = 0; index2 < 5; index2++) {
-        if ((index + index1) + index2 * 16 < 225) {
-          winsNums[winsNum].push((index + index1) + index2 * 16)
+        if (((index + index1) + (index2 * 15)) <= 225) {
+          winsNums[winsNum].push((index + index1) + (index2 * 15))
         } else {
           break;
         }
@@ -151,6 +152,7 @@ function gameRule() {
   winsNums = [];
   winsNum = 0;
 
+  // 赛选出正确的赢法
   wins = wins.filter(
     (item) => { return item.length === 5 }
   )
@@ -184,8 +186,8 @@ function JudgeSuccess() {
   const chessPieces = theBoard.querySelectorAll(".chessPieces");
   let node = [];
   let num = 0
-  for (let col = 0; col < 16; col++) {
-    for (let row = 0; row < 16; row++) {
+  for (let col = 0; col < 15; col++) {
+    for (let row = 0; row < 15; row++) {
       if (chessPieces[num].className === "chessPieces White") {
         node[num] = 1;
       } else if (chessPieces[num].className === "chessPieces black") {
