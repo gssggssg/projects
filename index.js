@@ -74,8 +74,6 @@ function chessPiecesFn() {
   下棋反馈改变棋子颜色
 */
 function chessPiecesColorFn(chessPiecesColor) {
-  // 获取所有的棋子节点
-  const chessPieces = theBoard.querySelectorAll(".chessPieces");
   chessPieces.forEach(
     (item, index) => {
       item.onclick = () => {
@@ -84,13 +82,16 @@ function chessPiecesColorFn(chessPiecesColor) {
           return;
         }
         item.classList.add(chessPiecesColor)
+        // 每次下棋都会判断是否胜利
+        judgeSuccess(index);
+        // 玩家下完后，将触发 电脑 下棋
+        chessAI(index, chessPiecesColor)
         if (chessPiecesColor === 'White') {
           chessPiecesColor = 'black';
         } else if (chessPiecesColor === 'black') {
           chessPiecesColor = 'White';
         }
-        // 每次下棋都会判断是否胜利
-        JudgeSuccess(index);
+
       }
     }
   )
@@ -100,9 +101,10 @@ function chessPiecesColorFn(chessPiecesColor) {
 /*
   判断输赢 
   @游戏规则
+    参数 ：theRanksOf 行列大小
 */
-// 每一列的赢法
-function gameRule() {
+
+function gameRule(theRanksOf) {
 
   // 一共有多少种胜利方法
   let wins = [];
@@ -170,14 +172,15 @@ function gameRule() {
   winsNums = [];
   winsNum = 0;
 
-  const sz = [4, 3, 2, 1, 0]
+  const winsArr = [4, 3, 2, 1, 0]
+
   // 每一撇胜利的方法
   for (let index1 = 0; index1 < 15; index1++) { // 每一列
     for (let index = 0; index < 226; index += 15) { // 每一行
       winsNums[winsNum] = [];
       for (let index2 = 0; index2 < 5; index2++) {
-        if (((index + index1 + sz[index2]) + (index2 * 15)) <= 220) {
-          winsNums[winsNum].push((index + index1 + sz[index2]) + (index2 * 15))
+        if (((index + index1 + winsArr[index2]) + (index2 * 15)) <= 220) {
+          winsNums[winsNum].push((index + index1 + winsArr[index2]) + (index2 * 15))
         } else {
           break;
         }
@@ -189,39 +192,45 @@ function gameRule() {
   winsNums = [];
   winsNum = 0;
 
+  // 优化代码
+  // const winsArr = [4, 3, 2, 1, 0]
+  // let sz = [
+  //   ['((col * 15 + 0) <= winsNum && winsNum < (col * 15 + 11))', 15, 1, 'lsWinsNum'],
+  //   ['((index + index1) + (index2 * 15))', 226, 15],
+  //   ['((index + index1) + (index2 * 15) + index2)', 226, 15],
+  //   ['((index + index1 + winsArr[index2]) + (index2 * 15))', 226, 15],
+  // ]
+
+  // for (let indexs = 0; indexs < sz.length; indexs++) {
+  //   for (let index = 0; index < theRanksOf; index++) {
+  //     for (let index1 = 0; index1 <= sz[indexs][1]; index1 += sz[indexs][2]) {
+  //       let lsWinsNum = winsNum;
+  //       winsNums[winsNum] = [];
+  //       for (let index2 = 0; index2 < 5; index2++) {
+  //         if (eval(sz[indexs][0]) <= 225) {
+  //           winsNums[winsNum].push(eval(sz[indexs][3] || sz[indexs][0]))
+  //         } else {
+  //           break;
+  //         }
+  //       }
+  //       wins.push(winsNums[winsNum]);
+  //       winsNum++
+  //     }
+  //   }
+
+  //   winsNums = [];
+  //   winsNum = 0;
+  // }
+
   // 赛选出正确的赢法
   wins = wins.filter(
     (item) => { return item.length === 5 }
   )
-
   return wins;
 }
 
 // 查找指定数组中的值，返回所查找到结果的数组
-function ToFindThe(arr, value) {
-  // 存放结果
-  let nawArr = [];
-  // 存放从迪哥开始查找的值
-  let pos = 0;
-  while (pos < arr.length) {
-    pos = arr.indexOf(value, pos);
-    if (pos === -1) {  // 没有结果退出循环
-      break;
-    }
-    nawArr.push(pos);
-    pos++;
-  }
-  return nawArr;
-}
-
-
-/*
-  判断胜利并触发事件
-    参数 piecesSite 当前棋子的位置
-*/
-function JudgeSuccess(piecesSite) {
-  // 获取所有的棋子节点
-  const chessPieces = theBoard.querySelectorAll(".chessPieces");
+function toFindThe(value) {
 
   let node = [];
   let num = 0
@@ -236,14 +245,35 @@ function JudgeSuccess(piecesSite) {
       } else if (chessPieces[num].className === "chessPieces") {
         node[num] = null;
       }
-      num++
+      num++;
     }
   }
 
+  // 存放结果
+  let nawArr = [];
+  // 存放从迪哥开始查找的值
+  let pos = 0;
+  while (pos < node.length) {
+    pos = node.indexOf(value, pos);
+    if (pos === -1) {  // 没有结果退出循环
+      break;
+    }
+    nawArr.push(pos);
+    pos++;
+  }
+  return nawArr;
+}
+
+
+/*
+  判断胜利并触发事件
+    参数 piecesSite 当前棋子的位置
+*/
+function judgeSuccess(piecesSite) {
   // 白字的数组
-  let WhiteChessPieces = ToFindThe(node, 1);
+  let WhiteChessPieces = toFindThe(1);
   // 黑子的数组
-  let blackChessPieces = ToFindThe(node, 2);
+  let blackChessPieces = toFindThe(2);
 
   // 场上少于五颗棋子不进入检查
   if (WhiteChessPieces.length < 5 && blackChessPieces.length < 5) {
@@ -253,6 +283,7 @@ function JudgeSuccess(piecesSite) {
   // 当前所下棋子有多少种赢法
   let piecesSites = gameRuleValue.filter(
     (item) => {
+      // 检查当前棋子在赢法库中有多少种
       return item.includes(piecesSite)
     }
   );
@@ -261,7 +292,7 @@ function JudgeSuccess(piecesSite) {
   function victoryFn(PiecesColor) {
     return piecesSites.map(
       (item, index) => {
-        let check = []
+        let check = [];
         return check[index] = item.map(
           (item1) => {
             return PiecesColor.includes(item1);
@@ -278,8 +309,110 @@ function JudgeSuccess(piecesSite) {
     alert("黑子胜利");
     Game = false;
   }
+}
+
+
+// 机器人
+
+/*
+  1. 先检测 玩家差多少棋子胜利
+  2. 阻止玩家胜利
+  3. 寻找取得胜利最多的方法
+  4. 下胜率最高的步骤。
+*/
+
+function chessAI(piecesSite, chessPiecesColor) {
+  if (!Game) {
+    return;
+  }
+
+  // 白字的数组
+  let WhiteChessPieces = toFindThe(1);
+  // 黑子的数组
+  let blackChessPieces = toFindThe(2);
+
+  // 当前所下棋子有多少种赢法
+  let piecesSites = gameRuleValue.filter(
+    (item) => {
+      // 检查当前棋子在赢法库中有多少种
+      return item.includes(piecesSite);
+    }
+  );
+
+  // 棋盘上的棋子编号赋值
+  if (chessPiecesColor === 'White') {
+    piecesNode[piecesSite] = true;  // 白色棋子为 true
+  } else if (chessPiecesColor === 'black') {
+    piecesNode[piecesSite] = false; // 黑子棋子为 false
+  }
+
+
+  // 检查
+  let feasible = []
+  for (let index = 0; index < piecesSites.length; index++) {
+    feasible[index] = []
+    for (let index1 = 0; index1 < piecesSites[index].length; index1++) {
+      feasible[index][index1] = piecesNode[piecesSites[index][index1]];
+    }
+  }
+
+  // 检查当前所下的子可以赢的位置
+  let canPlayChess = feasible.filter(
+    (item) => {
+      return !item.includes(false);
+    }
+  )
+
+  // 检查数组中出现数字最高的数字
+  // console.log(canPlayChess)
+  // function a() {
+  //   return
+  // }
+
+  // 查询白色棋子最多的方法
+  let trueNum;
+  let trueArr = [];
+
+  for (let index = 0; index < canPlayChess.length; index++) {
+    trueNum = 0
+    for (let index1 = 0; index1 < canPlayChess[index].length; index1++) {
+      if (canPlayChess[index][index1] === true) {
+        trueNum++
+      }
+    }
+    trueArr.push(trueNum);
+  }
+
+  // 返回最大值
+  let arrayMax = Function.prototype.apply.bind(Math.max, null);
+
+  // 进行排序，选择白子子数最多的那个方法下棋
+  // 应该阻止这个
+  let thePlayChes = canPlayChess[trueArr.indexOf(arrayMax(trueArr))]
+
+  // 检查当前所下的子可以赢的位置
+  let thePlayChess1 = thePlayChes.filter(
+    (item) => {
+      return typeof (piecesNode[item]) === "number";
+    }
+  )
+
+  let AIthePlayChess = thePlayChess1[Math.floor(Math.random() * thePlayChess1.length)]
+
+  // 改变当前棋子颜色
+  chessPieces[sml].classList.add('black');
+  piecesNode[sml] = false;
+  // 检查当前棋子是否胜利
+  judgeSuccess(sml);
+  // 触发玩家下棋
+  chessPiecesColorFn('White');
 
 }
+
+
+
+// 棋盘大小
+let theRanksOf = 15;
 
 // 绘制棋盘
 theBoardFn();
@@ -287,8 +420,21 @@ theBoardFn();
 // 绘制棋子
 chessPiecesFn();
 
+// 获取所有的棋子节点
+const chessPieces = theBoard.querySelectorAll(".chessPieces");
+
 // 有多少种赢法,初始化加载赢的方法
-let gameRuleValue = gameRule();
+const gameRuleValue = gameRule(theRanksOf);
+
+let piecesNode = [];
+let piecesNodeNum = 0
+for (let index = 0; index < 15; index++) {
+  for (let index1 = 0; index1 < 15; index1++) {
+    piecesNode.push(piecesNodeNum)
+    piecesNodeNum++
+  }
+}
+
 
 /*
   改变棋子颜色
