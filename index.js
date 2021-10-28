@@ -331,14 +331,6 @@ function chessAI(piecesSite, chessPiecesColor) {
   // 黑子的数组
   let blackChessPieces = toFindThe(2);
 
-  // 当前所下棋子有多少种赢法
-  let piecesSites = gameRuleValue.filter(
-    (item) => {
-      // 检查当前棋子在赢法库中有多少种
-      return item.includes(piecesSite);
-    }
-  );
-
   // 棋盘上的棋子编号赋值
   if (chessPiecesColor === 'White') {
     piecesNode[piecesSite] = true;  // 白色棋子为 true
@@ -346,38 +338,53 @@ function chessAI(piecesSite, chessPiecesColor) {
     piecesNode[piecesSite] = false; // 黑子棋子为 false
   }
 
+  // 白棋所有赢法
+  let WhiteWins = [];
 
-  // 检查
-  let feasible = []
-  for (let index = 0; index < piecesSites.length; index++) {
-    feasible[index] = []
-    for (let index1 = 0; index1 < piecesSites[index].length; index1++) {
-      feasible[index][index1] = piecesNode[piecesSites[index][index1]];
+  // 检查棋盘上所下的白棋所有赢法
+  for (let index = 0; index < WhiteChessPieces.length; index++) {
+    let ls = [...gameRuleValue.filter(
+      (item) => {
+        return item.includes(WhiteChessPieces[index]);
+      }
+    )]
+    for (let index1 = 0; index1 < ls.length; index1++) {
+      if (!WhiteWins.includes(ls[index1])) {
+        WhiteWins.push(ls[index1])
+      }
     }
   }
 
+  let WhiteWinss = WhiteWins.filter(
+    (item) => {
+      for (let index = 0; index < blackChessPieces.length || 1; index++) {
+        return !item.includes(blackChessPieces[index]);
+      }
+    }
+  )
+
+  let feasible = [];
+  for (let index = 0; index < WhiteWinss.length; index++) {
+    feasible[index] = [];
+    for (let index1 = 0; index1 < WhiteWinss[index].length; index1++) {
+      feasible[index][index1] = piecesNode[WhiteWinss[index][index1]];
+    }
+  }
   // 检查当前所下的子可以赢的位置
   let canPlayChess = feasible.filter(
     (item) => {
       return !item.includes(false);
     }
   )
-
-  // 检查数组中出现数字最高的数字
-  // console.log(canPlayChess)
-  // function a() {
-  //   return
-  // }
-
   // 查询白色棋子最多的方法
   let trueNum;
   let trueArr = [];
 
   for (let index = 0; index < canPlayChess.length; index++) {
-    trueNum = 0
+    trueNum = 0;
     for (let index1 = 0; index1 < canPlayChess[index].length; index1++) {
       if (canPlayChess[index][index1] === true) {
-        trueNum++
+        trueNum++;
       }
     }
     trueArr.push(trueNum);
@@ -386,29 +393,68 @@ function chessAI(piecesSite, chessPiecesColor) {
   // 返回最大值
   let arrayMax = Function.prototype.apply.bind(Math.max, null);
 
-  // 进行排序，选择白子子数最多的那个方法下棋
-  // 应该阻止这个
-  let thePlayChes = canPlayChess[trueArr.indexOf(arrayMax(trueArr))]
-
-  // 检查当前所下的子可以赢的位置
-  let thePlayChess1 = thePlayChes.filter(
-    (item) => {
-      return typeof (piecesNode[item]) === "number";
+  let arrMaxNum = [];
+  trueArr.map(
+    (item, index) => {
+      if (item === arrayMax(trueArr)) {
+        arrMaxNum.push(index);
+      }
     }
   )
 
-  let AIthePlayChess = thePlayChess1[Math.floor(Math.random() * thePlayChess1.length)]
+  let mostArr = [];
+  // 获取最多的两个
+  for (let index = 0; index < arrMaxNum.length; index++) {
+    mostArr.push([...canPlayChess[arrMaxNum[index]]])
+  }
+  // 将数组中的 turn 去掉
+  let canTheChess = mostArr.map(
+    (item) => {
+      return item.filter(
+        (item) => {
+          return typeof (piecesNode[item]) === "number";
+        }
+      )
+    }
+  )
 
+  // 检查出出现最多次数的数字
+  let mostTimesNam = []
+  for (let index = 0; index < canTheChess.length; index++) {
+    mostTimesNam = [...mostTimesNam, ...canTheChess[index]];
+  }
+
+  let mostNum = 0;
+  let mostNums = [];
+  for (let i = 0; i < mostTimesNam.length; i++) {
+    if (mostTimesNam.indexOf(mostTimesNam[i]) == i) {
+      let num = 1;
+      for (var j = i + 1; j < mostTimesNam.length; j++) {
+        if (mostTimesNam[i] === mostTimesNam[j]) {
+          num++;
+        }
+      }
+      if (mostNum < num) {
+        mostNum = num;
+        mostNums = [];
+        mostNums.push(mostTimesNam[i]);
+      } else if (mostNum <= num) {
+        mostNum = num;
+        mostNums.push(mostTimesNam[i]);
+      }
+    }
+  }
+
+  let AIthePlayChess = mostNums[Math.floor(Math.random() * mostNums.length)]
   // 改变当前棋子颜色
   chessPieces[AIthePlayChess].classList.add('black');
+
   piecesNode[AIthePlayChess] = false;
   // 检查当前棋子是否胜利
   judgeSuccess(AIthePlayChess);
   // 触发玩家下棋
   chessPiecesColorFn('White');
-
 }
-
 
 
 // 棋盘大小
