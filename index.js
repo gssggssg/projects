@@ -152,10 +152,48 @@ function gameRule() {
   winsNums = [];
   winsNum = 0;
 
+  // 每一撇胜利的方法
+  for (let index1 = 0; index1 < 15; index1++) { // 每一列
+    for (let index = 0; index < 226; index += 15) { // 每一行
+      winsNums[winsNum] = [];
+      for (let index2 = 0; index2 < 5; index2++) {
+        if (((index + index1) + (index2 * 15) + index2) <= 225) {
+          winsNums[winsNum].push((index + index1) + (index2 * 15) + index2)
+        } else {
+          break;
+        }
+      }
+      wins.push(winsNums[winsNum]);
+      winsNum++
+    }
+  }
+  winsNums = [];
+  winsNum = 0;
+
+  const sz = [4, 3, 2, 1, 0]
+  // 每一撇胜利的方法
+  for (let index1 = 0; index1 < 15; index1++) { // 每一列
+    for (let index = 0; index < 226; index += 15) { // 每一行
+      winsNums[winsNum] = [];
+      for (let index2 = 0; index2 < 5; index2++) {
+        if (((index + index1 + sz[index2]) + (index2 * 15)) <= 220) {
+          winsNums[winsNum].push((index + index1 + sz[index2]) + (index2 * 15))
+        } else {
+          break;
+        }
+      }
+      wins.push(winsNums[winsNum]);
+      winsNum++
+    }
+  }
+  winsNums = [];
+  winsNum = 0;
+
   // 赛选出正确的赢法
   wins = wins.filter(
     (item) => { return item.length === 5 }
   )
+
   return wins;
 }
 
