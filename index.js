@@ -400,10 +400,10 @@ function chessAI(piecesSite, chessPiecesColor) {
   let AIthePlayChess = thePlayChess1[Math.floor(Math.random() * thePlayChess1.length)]
 
   // 改变当前棋子颜色
-  chessPieces[sml].classList.add('black');
-  piecesNode[sml] = false;
+  chessPieces[AIthePlayChess].classList.add('black');
+  piecesNode[AIthePlayChess] = false;
   // 检查当前棋子是否胜利
-  judgeSuccess(sml);
+  judgeSuccess(AIthePlayChess);
   // 触发玩家下棋
   chessPiecesColorFn('White');
 
