@@ -77,7 +77,7 @@ function chessPiecesColorFn(chessPiecesColor) {
   // 获取所有的棋子节点
   const chessPieces = theBoard.querySelectorAll(".chessPieces");
   chessPieces.forEach(
-    (item) => {
+    (item, index) => {
       item.onclick = () => {
         // 判断棋子和游戏是否存在
         if (item.className !== "chessPieces" || !Game) {
@@ -90,7 +90,7 @@ function chessPiecesColorFn(chessPiecesColor) {
           chessPiecesColor = 'White';
         }
         // 每次下棋都会判断是否胜利
-        JudgeSuccess();
+        JudgeSuccess(index);
       }
     }
   )
@@ -159,7 +159,6 @@ function gameRule() {
   return wins;
 }
 
-
 // 查找指定数组中的值，返回所查找到结果的数组
 function ToFindThe(arr, value) {
   // 存放结果
@@ -180,12 +179,16 @@ function ToFindThe(arr, value) {
 
 /*
   判断胜利并触发事件
+    参数 piecesSite 当前棋子的位置
 */
-function JudgeSuccess() {
+function JudgeSuccess(piecesSite) {
   // 获取所有的棋子节点
   const chessPieces = theBoard.querySelectorAll(".chessPieces");
+
   let node = [];
   let num = 0
+
+  // 检查已下的棋子位置
   for (let col = 0; col < 15; col++) {
     for (let row = 0; row < 15; row++) {
       if (chessPieces[num].className === "chessPieces White") {
@@ -203,22 +206,46 @@ function JudgeSuccess() {
   let WhiteChessPieces = ToFindThe(node, 1);
   // 黑子的数组
   let blackChessPieces = ToFindThe(node, 2);
-  for (let index = 0; index < gameRuleValue.length; index++) {
-    if (WhiteChessPieces.join("|").includes(gameRuleValue[index].join("|"))) {
-      Game = false;
-      alert("白子胜利");
-      return;
-    }
-    if (blackChessPieces.join("|").includes(gameRuleValue[index].join("|"))) {
-      Game = false;
-      alert("黑子胜利");
-      return;
-    }
+
+  // 场上少于五颗棋子不进入检查
+  if (WhiteChessPieces.length < 5 && blackChessPieces.length < 5) {
+    return;
   }
+
+  // 当前所下棋子有多少种赢法
+  let piecesSites = gameRuleValue.filter(
+    (item) => {
+      return item.includes(piecesSite)
+    }
+  );
+
+  // 检查是否胜利函数
+  function victoryFn(PiecesColor) {
+    return piecesSites.map(
+      (item, index) => {
+        let check = []
+        return check[index] = item.map(
+          (item1) => {
+            return PiecesColor.includes(item1);
+          }
+        ).includes(false);
+      }
+    ).includes(false);
+  }
+
+  if (victoryFn(WhiteChessPieces)) {
+    alert("白子胜利");
+    Game = false;
+  } else if (victoryFn(blackChessPieces)) {
+    alert("黑子胜利");
+    Game = false;
+  }
+
 }
 
 // 绘制棋盘
 theBoardFn();
+
 // 绘制棋子
 chessPiecesFn();
 
@@ -230,8 +257,6 @@ let gameRuleValue = gameRule();
     参数 第一次棋子颜色
 */
 chessPiecesColorFn("White");
-
-
 
 // 定时器
 console.timeEnd("time");
