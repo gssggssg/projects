@@ -14,15 +14,21 @@
 console.time("time")
 
 // 判断游戏是否进行中
-let Game = true;
-
+let Game = false;
+// 单人玩还是人机玩 
+let TheManMachine = true
 // 棋盘的节点
 const theBoard = document.getElementsByClassName("theBoard")[0];
 
 // 棋盘上的棋格节点
 const theBoardLi = [];
 
-
+// 
+const gameMenu = document.querySelectorAll('.gameMenu');
+// 获取开始游戏的菜单
+const playGameOptions = document.querySelectorAll('.playGameOptions')[0].getElementsByTagName("li");
+const gameOverOptions = document.querySelectorAll('.gameOverOptions')[0].getElementsByTagName("li");
+let gameOverOptionsText = document.querySelectorAll('.gameOverOptions')[0].getElementsByTagName("p")[0];
 /*
   绘制棋盘
 */
@@ -56,7 +62,7 @@ function theBoardFn() {
 
 
 /* 
-  添加棋子
+  绘制初始棋子
 */
 function chessPiecesFn() {
   let newDiv;
@@ -83,9 +89,9 @@ function chessPiecesColorFn(chessPiecesColor) {
         }
         item.classList.add(chessPiecesColor)
         // 每次下棋都会判断是否胜利
-        judgeSuccess(index);
+        judgeSuccess(index)
         // 玩家下完后，将触发 电脑 下棋
-        chessAI(index, chessPiecesColor)
+        TheManMachine ? chessAI(index, chessPiecesColor) : null;
         if (chessPiecesColor === 'White') {
           chessPiecesColor = 'black';
         } else if (chessPiecesColor === 'black') {
@@ -112,7 +118,6 @@ function gameRule(theRanksOf) {
   // 有多少种方法
   let winsNums = [];
 
-  // 
   let winsNum = 0;
 
   // 每一列胜利的方法
@@ -303,12 +308,23 @@ function judgeSuccess(piecesSite) {
   }
 
   if (victoryFn(WhiteChessPieces)) {
-    alert("白子胜利");
+    gameMenu[1].style.display = "block";
+    gameOverOptionsText.innerText = "游戏结束，白子胜利";
     Game = false;
   } else if (victoryFn(blackChessPieces)) {
-    alert("黑子胜利");
+    gameMenu[1].style.display = "block";
+    gameOverOptionsText.innerText = "游戏结束，黑子胜利";
     Game = false;
   }
+
+  if (victoryFn(blackChessPieces) || victoryFn(WhiteChessPieces)) {
+    for (let index = 0; index < chessPieces.length; index++) {
+      if (chessPieces[index].className !== "chessPieces") {
+        chessPieces[index].className = "chessPieces";
+      }
+    }
+  }
+
 }
 
 
@@ -317,8 +333,8 @@ function judgeSuccess(piecesSite) {
 /*
   1. 先检测 玩家差多少棋子胜利
   2. 阻止玩家胜利
-  3. 寻找取得胜利最多的方法
-  4. 下胜率最高的步骤。
+  3. 寻找取得胜利最多的方法 x
+  4. 下胜率最高的步骤。 x
 */
 
 function chessAI(piecesSite, chessPiecesColor) {
@@ -355,6 +371,7 @@ function chessAI(piecesSite, chessPiecesColor) {
     }
   }
 
+  // 将有黑子的赢法排除掉
   let WhiteWinss = WhiteWins.filter(
     (item) => {
       for (let index = 0; index < blackChessPieces.length || 1; index++) {
@@ -490,3 +507,31 @@ chessPiecesColorFn("White");
 
 // 定时器
 console.timeEnd("time");
+
+// 菜单按钮
+// 双人开始游戏
+playGameOptions[0].onclick = () => {
+  Game = true;
+  TheManMachine = false;
+  gameMenu[0].style.display = "none";
+}
+
+// 单人开始游戏
+playGameOptions[1].onclick = () => {
+  Game = true;
+  TheManMachine = true;
+  gameMenu[0].style.display = "none";
+}
+
+// 游戏结束
+// 回到主页
+gameOverOptions[0].onclick = () => {
+  gameMenu[1].style.display = "none";
+  gameMenu[0].style.display = "block";
+}
+
+// 再来一次
+gameOverOptions[1].onclick = () => {
+  Game = true;
+  gameMenu[1].style.display = "none";
+}
