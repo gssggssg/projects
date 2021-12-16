@@ -1,7 +1,8 @@
 import * as React from "react"
-import { Routes, Route } from "react-router-dom";
-import Snake from './pages/Snake'
-import Gobang from './pages/Gobang';
+// 引入routes组件
+import routes from "./routes";
+// 引入包管理工具
+import { renderRoutes, RouteConfig } from "react-router-config";
 
 const App = () => {
   return (
@@ -10,10 +11,7 @@ const App = () => {
         <a href="/snake">Snake</a>
         <a href="/gobang">Gobang</a>
       </ul>
-      <Routes>
-        <Route path="/snake" element={<Snake />} />
-        <Route path="/gobang" element={<Gobang />} />
-      </Routes>
+      {renderRoutes(routes as RouteConfig[])}
     </div>
   );
 }
