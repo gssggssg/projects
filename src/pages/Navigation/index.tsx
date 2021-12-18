@@ -16,7 +16,7 @@ interface Props {
 const Navigation = (props: Props) => {
   const { navigation } = props;
   return (
-    <nav>
+    <nav className="navigation">
       {
         navigation.menu?.length > 0 && navigation.menu?.map(
             (item: { title: string, path: string }) => {
