@@ -15,6 +15,10 @@ interface action {
 const initState: menu = {
   menu: [
     {
+      title: "Home",
+      path: "/",
+    },
+    {
       title: "贪吃蛇",
       path: "snake",
     },
