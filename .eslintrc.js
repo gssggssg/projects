@@ -26,6 +26,7 @@ module.exports = {
     'no-unreachable': 2, // 不能有无法执行的代码
     'object-curly-spacing': 'always',
     "quotes": "double",
+    "require-jsdoc":0, // 禁止使用 函数注释
   },
 
 };
