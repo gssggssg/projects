@@ -1,3 +1,6 @@
+/**
+ * @food 食物类
+ */
 import * as React from "react";
 import { connect } from "react-redux";
 import "./food.scss";

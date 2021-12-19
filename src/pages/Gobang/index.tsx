@@ -4,7 +4,7 @@ import "./index.scss";
 const Gobang = () => {
   return (
     <div>
-      Gobang-页面
+      这里是Gobang-页面
     </div>
   );
 };
