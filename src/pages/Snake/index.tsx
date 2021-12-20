@@ -8,7 +8,6 @@ interface Props {
 };
 
 const Snake = (props: Props) => {
-  console.log(props.snake);
   return (
     <div className="GluttonousSnake">
       <div className="stage">
@@ -28,7 +27,7 @@ const Snake = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: { snake: string }) => ({
   snake: state.snake,
 });
 
