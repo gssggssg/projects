@@ -1,14 +1,14 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
 import navigation from './navigation';
 import snake from './snake';
+import { configureStore } from "@reduxjs/toolkit";
 
-const appReducer = combineReducers({
-  navigation,
-  snake,
+const store = configureStore({
+  reducer: {
+    navigation,
+    snake,
+  },
 });
 
-// 创建 store
-const store = createStore(appReducer, applyMiddleware(thunk));
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;
