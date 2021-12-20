@@ -9,6 +9,7 @@ interface menu {
 };
 
 interface action {
+  type: string,
   payload: menu,
 };
 
@@ -31,7 +32,12 @@ const initState: menu = {
 };
 
 function navigation(state = initState, action: action): menu {
-  return { ...state, ...action };
+  switch (action.type) {
+    case "navigation":
+      return { ...state, ...action };
+    default:
+      return state;
+  }
 }
 
 export default navigation;
