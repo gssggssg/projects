@@ -1,23 +1,15 @@
-interface menu {
-  type: string;
-};
+import { createSlice } from "@reduxjs/toolkit";
 
-interface action {
-  type: string,
-  payload: menu,
-};
+export const snake = createSlice({
+  name: "snake",
+  initialState: { value: 0 },
+  reducers: {
+    updata: (state, { payload }) => {
+      return { ...state, ...payload };
+    },
+  },
+});
 
-const initState: menu = {
-  type: "snake",
-};
+export const { updata } = snake.actions;
 
-function snake(state = initState, action: action): menu {
-  switch (action.type) {
-    case "snake":
-      return { ...state, ...action };
-    default:
-      return { ...state };
-  }
-}
-
-export default snake;
+export default snake.reducer;

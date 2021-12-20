@@ -1,19 +1,15 @@
-interface menu {
+import { createSlice } from "@reduxjs/toolkit";
+
+interface SliceState {
   menu: {
     [index: number]: {
       title: string;
       path: string;
     },
   }
-  type: string;
-};
+}
 
-interface action {
-  type: string,
-  payload: menu,
-};
-
-const initState: menu = {
+const initialState: SliceState = {
   menu: [
     {
       title: "Home",
@@ -28,16 +24,18 @@ const initState: menu = {
       path: "gobang",
     },
   ],
-  type: "navigation",
 };
 
-function navigation(state = initState, action: action): menu {
-  switch (action.type) {
-    case "navigation":
-      return { ...state, ...action };
-    default:
-      return state;
-  }
-}
+export const navigation = createSlice({
+  name: 'navigation',
+  initialState,
+  reducers: {
+    updata: (state, {payload}) => {
+      return { ...state, ...payload };
+    },
+  },
+});
 
-export default navigation;
+export const { updata } = navigation.actions;
+
+export default navigation.reducer;
