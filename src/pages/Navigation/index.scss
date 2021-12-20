@@ -10,7 +10,10 @@ a{
   line-height: 50px;
   margin: auto;
   position: sticky;
-  top: 10;
+  z-index: 9999999;
+  top: 10px;
   display: flex;
   justify-content: space-evenly;
+  color:#fff;
+  text-shadow: 0px 0px 6px #fff;
 }
