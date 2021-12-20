@@ -9,7 +9,7 @@ interface Props {
   state: any;
 };
 
-const Food = (props: Props) => {
+const Food = (props: Props): JSX.Element => {
   return (
     <div className="food">
       <div></div>

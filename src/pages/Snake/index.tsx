@@ -3,11 +3,18 @@ import { connect } from "react-redux";
 import Food from "./food";
 import "./index.scss";
 
-interface Props {
-  snake: string;
+interface snake {
+  score: number,
+  level: number,
 };
 
-const Snake = (props: Props) => {
+interface Props {
+  snake: snake,
+  dispatch: any,
+};
+
+const Snake = (props: Props): JSX.Element => {
+  const { score, level } = props.snake;
   return (
     <div className="GluttonousSnake">
       <div className="stage">
@@ -20,14 +27,14 @@ const Snake = (props: Props) => {
         <Food />
       </div>
       <div className="scoreboard">
-        <div>SCORE : <span>0</span></div>
-        <div>Level : <span>1</span></div>
+        <div>SCORE : <span>{score}</span></div>
+        <div>Level : <span>{level}</span></div>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state: { snake: string }) => ({
+const mapStateToProps = (state: { snake: snake }) => ({
   snake: state.snake,
 });
 
