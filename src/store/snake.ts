@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface snakeType {
+export interface snakeType {
   score: number,
   level: number,
 };
@@ -19,7 +19,5 @@ export const snake = createSlice({
     },
   },
 });
-
-export const { updata } = snake.actions;
 
 export default snake.reducer;

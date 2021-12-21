@@ -36,6 +36,4 @@ export const navigation = createSlice({
   },
 });
 
-export const { updata } = navigation.actions;
-
 export default navigation.reducer;
