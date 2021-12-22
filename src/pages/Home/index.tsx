@@ -13,7 +13,7 @@ const Home = (props: Props): JSX.Element => {
   return (
     <div className="homeContent">
       <Card width="50%" height="400px" >
-        <div style={{ lineHeight: "400px" }}>这里是首页</div>
+        <div style={{ lineHeight: "384px" }}>这里是首页</div>
       </Card>
     </div>
   );
