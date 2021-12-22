@@ -16,6 +16,10 @@ const initialState: SliceState = {
       path: "/",
     },
     {
+      title: "Todo",
+      path: "/todo",
+    },
+    {
       title: "贪吃蛇",
       path: "snake",
     },

@@ -1,5 +1,6 @@
 // 导入路由组件
 import Home from '../pages/Home';
+import Todo from '../pages/Todo';
 import Snake from '../pages/Snake';
 import Gobang from '../pages/Gobang';
 // 导入路由管理工具
@@ -15,6 +16,11 @@ const routes: RouteConfig = [
     path: '/home',
     exact: true,
     component: Home,
+  },
+  {
+    path: '/todo',
+    exact: true,
+    component: Todo,
   },
   {
     path: '/snake',

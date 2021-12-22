@@ -20,7 +20,7 @@ const Home = (props: Props): JSX.Element => {
 };
 
 const mapStateToProps = (state: { home: homeType }) => ({
-  snake: state.home,
+  home: state.home,
 });
 
 export default connect(mapStateToProps)(Home);
