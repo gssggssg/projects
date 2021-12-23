@@ -1,11 +1,16 @@
+import { configureStore } from "@reduxjs/toolkit";
 import navigation from './navigation';
 import snake from './snake';
-import { configureStore } from "@reduxjs/toolkit";
+import home from './home';
+import todo from './todo';
+
 
 const store = configureStore({
   reducer: {
     navigation,
     snake,
+    home,
+    todo,
   },
 });
 

@@ -1,0 +1,32 @@
+// InputBox scss
+.InputBox{
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(51, 51, 51, 0.295);
+  textarea{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    overflow: hidden;
+    z-index: 99999999;  resize:none;
+  
+    background-color: rgba(51, 51, 51, 0.295);
+  }
+  pre{
+    opacity: 0;
+    padding: 10px;
+  }
+  pre,textarea{
+    display: block;
+    margin: auto;
+    overflow: hidden;
+    padding: 10px;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
