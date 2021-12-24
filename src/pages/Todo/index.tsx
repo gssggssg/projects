@@ -5,7 +5,7 @@ import { todoType } from "../../store/todo";
 import Card from "../../components/Card";
 import InputBox from "./InputBox";
 import ItemList from "./ItemList";
-
+import Buttons from "./Buttons";
 import "./index.scss";
 
 interface Props {
@@ -15,17 +15,19 @@ interface Props {
 
 const Todo = (props: Props): JSX.Element => {
   return (
-    <Card width="94%">
+    <div className="bujd">
+      <Buttons />
       <div className="buj">
-        <Card width="26%" style={{ minWidth: "200px" }}>
+        <Card className='Card' width="20%" style={{ minWidth: "200px" }}>
           <ItemList />
         </Card>
-        <Card width="70%">
-          <InputBox />
-        </Card>
-
+        <div style={{ width: "78%" }}>
+          <Card className='Card' width="96%">
+            <InputBox />
+          </Card>
+        </div>
       </div>
-    </Card>
+    </div>
   );
 };
 

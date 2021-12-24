@@ -1,9 +1,17 @@
-// Todo scss
-.homeContent{
-  width: 80%;
-  margin: auto;
+// todo scss
+.bujd{
+  width: 100%;
+  overflow: hidden;
+  background-color: #363433;
+}
+.buj{
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  overflow: hidden;
+  background-color: #363433;
 }
 
-.buj{
-  display: flex;
+.Card{
+  box-shadow: 0 0 6px 1px #aaa;
 }
