@@ -4,26 +4,34 @@ import { connect } from "react-redux";
 import "./index.scss";
 
 interface Props {
+  todoData: any,
   dispatch: any,
 };
 
 const ItemList = (props: Props): JSX.Element => {
+  const { todoData } = props;
+  const dianji = (e: any): void => {
+    // console.log(e.target);
+  };
   return (
-    <>
-      <div>
-        <ul>
-          <a>第一项</a>
-          <a>第二项</a>
-          <a>第三项</a>
-          <a>第四项</a>
-        </ul>
-      </div>
-    </>
+    <div>
+      <ul>
+        {
+          todoData?.map(
+              (item: { title: string }, index: number): JSX.Element => {
+                return (<li key={index}>
+                  <a onClick={dianji}>{item.title}</a>
+                </li>);
+              },
+          )
+        }
+      </ul>
+    </div>
   );
 };
 
-const mapStateToProps = (state: { todo: any }) => ({
-  todo: state.todo,
+const mapStateToProps = (state: { todo: { data: object[] } }) => ({
+  todoData: state.todo.data,
 });
 
 export default connect(mapStateToProps)(ItemList);

@@ -1,5 +1,9 @@
 // Todo scss
-.homeContent{
-  width: 80%;
-  margin: auto;
+li{
+  list-style: none;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ccc;
 }
