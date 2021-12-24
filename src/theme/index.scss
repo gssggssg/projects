@@ -1,0 +1,16 @@
+
+$theme-bright-background: #eee;
+$theme-dark-color: #333;
+$theme-dark-background: #363433;
+$theme-dark-color: #eee;
+
+body{
+  background-color: $theme-dark-background;
+}
+.dark{
+  *{
+    border-color: $theme-dark-color;
+    background-color: $theme-dark-background;
+    color: $theme-dark-color;
+  }
+}
