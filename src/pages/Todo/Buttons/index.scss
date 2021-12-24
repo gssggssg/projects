@@ -1,0 +1,30 @@
+// Buttons scss
+.buttons{
+  width: 94%;
+  margin: auto;
+  padding: 0 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  button{
+    background-color: #363433;
+    box-shadow: 0 0 2px 1px #ccc;
+    width: 100px;
+    margin: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+  button:hover{
+    background-color: #444241;
+    box-shadow: 0 0 2px 1px #ccc;
+    transition: all 0.3s ease-in-out;
+  }
+  button,button:focus{
+    outline: none;
+    border: none;
+    padding: 10px;
+    color: #ccc;
+    transition: all 0.3s ease-in-out;
+  }
+}
