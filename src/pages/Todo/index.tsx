@@ -15,9 +15,9 @@ interface Props {
 
 const Todo = (props: Props): JSX.Element => {
   return (
-    <div className="bujd">
+    <div className="blackBg">
       <Buttons />
-      <div className="buj">
+      <div className="todobg">
         <Card className='Card' width="20%" style={{ minWidth: "200px" }}>
           <ItemList />
         </Card>
