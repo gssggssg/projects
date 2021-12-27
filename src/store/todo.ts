@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface todoDataType {
-  filter: any;
-  map: any;
   [index: number]: {
     id: number,
     value: string;
@@ -11,6 +9,7 @@ export interface todoDataType {
 };
 export interface todoType {
   data: todoDataType,
+  currentData: todoDataType,
   isEdit: boolean,
 };
 
@@ -23,23 +22,24 @@ const todoData: todoDataType | any = [
   { id: 1, value: "请输入", title: "请输入内容" },
 ];
 
-const state: todoType = {
+const states: todoType = {
   data: todoData,
+  currentData: todoData[0],
   isEdit: true,
 };
 
 export const todo = createSlice({
   name: "todo",
-  initialState: state,
+  initialState: states,
   reducers: {
     adddata: (state, { payload }) => {
-      const data: any = [
-        {
-          value: payload.value,
-          title: payload.title,
-        },
-      ];
-      localStorage.setItem('todoData', JSON.stringify(data));
+      return { ...state, currentData: payload };
+    },
+    saveData: (state, { payload }) => {
+      const data = todoData.map((item: any, index: number) => {
+        if (item.id === payload.currentData.id) return payload.currentData;
+        return item;
+      });
       return { ...state, data };
     },
     updata: (state, { payload }) => {

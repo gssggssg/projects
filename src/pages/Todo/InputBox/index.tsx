@@ -4,12 +4,10 @@ import { connect } from "react-redux";
 import "./index.scss";
 
 interface Props {
-  todoData: {
-    [index: number]: {
-      id: number,
-      value: string;
-      title: string;
-    },
+  currentData: {
+    id: number,
+    value: string;
+    title: string;
   },
   todo: any,
   isEdit: boolean,
@@ -17,11 +15,11 @@ interface Props {
 };
 
 const InputBox = (props: Props): JSX.Element => {
-  const { isEdit, todoData } = props;
-  const { value, title } = todoData[0];
+  const { isEdit, currentData } = props;
+  const { value, title, id } = currentData;
   const oninput = (event: any): void => {
     const parameter: any = {
-      id: 1,
+      id: id,
       title: event.target.localName === "input" ? event.target.value : title,
       value: event.target.localName === "textarea" ? event.target.value : value,
     };
@@ -55,10 +53,13 @@ const InputBox = (props: Props): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: { todo: { isEdit: boolean, data: any } }) => ({
+const mapStateToProps = (
+    state: {
+      todo: { isEdit: boolean, currentData: any }
+  }) => ({
   todo: state.todo,
   isEdit: state.todo.isEdit,
-  todoData: state.todo.data,
+  currentData: state.todo.currentData,
 });
 
 export default connect(mapStateToProps)(InputBox);
