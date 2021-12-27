@@ -27,6 +27,7 @@ module.exports = {
     'object-curly-spacing': 'always',
     "quotes": "double",
     "require-jsdoc":0, // 禁止使用 函数注释
+    "valid-jsdoc": 0,//jsdoc规则
   },
 
 };
