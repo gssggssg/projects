@@ -18,7 +18,7 @@ const Todo = (props: Props): JSX.Element => {
     <div className="blackBg">
       <Buttons />
       <div className="todobg">
-        <Card className='Card' width="20%" style={{ minWidth: "200px" }}>
+        <Card className='Card leftCard' width="20%">
           <ItemList />
         </Card>
         <div style={{ width: "78%" }}>
