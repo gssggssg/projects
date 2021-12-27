@@ -25,7 +25,7 @@ const Card: React.FC<Props> = (props: Props): JSX.Element => {
   rounded = typeof rounded === "string" ? rounded : `${rounded}px`;
   return (
     <div
-      className={`componentCard ${className}`}
+      className={`gssgCard ${className}`}
       style={{ ...style, width, height, borderRadius: rounded }}
     >
       {props.children}
