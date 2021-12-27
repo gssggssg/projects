@@ -19,7 +19,9 @@ export interface todoType {
 // JSON.parse(ccc as string);
 // console.log(localStorage.getItem('todoData'))
 
-const todoData: todoDataType | any = [{ id: 1, value: "请输入", title: "请输入内容" }];
+const todoData: todoDataType | any = [
+  { id: 1, value: "请输入", title: "请输入内容" },
+];
 
 const state: todoType = {
   data: todoData,

@@ -2,8 +2,21 @@
 li{
   list-style: none;
   line-height: 30px;
+  min-height: 30px;
+  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #ccc;
+  padding: 0 4px;
+}
+
+li:hover{
+  cursor: pointer;
+  background-color: #444241;
+  border-radius: 4px;
+
+  a{
+    color: #ddd;
+  }
 }
