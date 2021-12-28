@@ -10,17 +10,22 @@ interface Props {
 
 const ItemList = (props: Props): JSX.Element => {
   const { todoData } = props;
-  const dianji = (e: any): void => {
-    // console.log(e.target);
+  const switchMatter = (value: { title: string; id: string; value: string }):
+    void => {
+    props.dispatch({
+      type: "todo/updata",
+      payload: { data: todoData, isEdit: true, currentData: value },
+    });
   };
   return (
     <div>
       <ul>
         {
           todoData?.map(
-              (item: { title: string }, index: number): JSX.Element => {
-                return (<li key={index}>
-                  <a onClick={dianji}>{item.title}</a>
+              (item: { title: string, id: string, value: string }):
+                JSX.Element => {
+                return (<li key={item.id} onClick={() => switchMatter(item)}>
+                  <span>{item.title}</span>
                 </li>);
               },
           )

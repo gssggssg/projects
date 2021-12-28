@@ -16,6 +16,7 @@ interface Props {
 
 const InputBox = (props: Props): JSX.Element => {
   const { isEdit, currentData } = props;
+  console.log(currentData);
   const { value, title, id } = currentData;
   const oninput = (event: any): void => {
     const parameter: any = {
@@ -24,7 +25,7 @@ const InputBox = (props: Props): JSX.Element => {
       value: event.target.localName === "textarea" ? event.target.value : value,
     };
     props.dispatch({
-      type: "todo/adddata",
+      type: "todo/changeData",
       payload: parameter,
     });
   };
