@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./index.scss";
+import styles from "./index.module.scss";
 
 interface Props {
   text: string;
@@ -28,7 +28,7 @@ const Button: React.FC<Props> = (props: Props): JSX.Element => {
   // const gssgOnClick = gssgDisabled ? onClick : null;
   return (
     <button
-      className={`gssgButton ${className || ""}`}
+      className={`${styles.gssgButton} ${className || ""}`}
       style={{ ...style, width, height }}
       disabled={gssgDisabled}
       onClick={onClick}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./index.scss";
+import styles from "./index.module.scss";
 
 interface Props {
   children?: JSX.Element;
@@ -25,7 +25,7 @@ const Card: React.FC<Props> = (props: Props): JSX.Element => {
   rounded = typeof rounded === "string" ? rounded : `${rounded}px`;
   return (
     <div
-      className={`gssgCard ${className}`}
+      className={`${styles.gssgCard} ${className}`}
       style={{ ...style, width, height, borderRadius: rounded }}
     >
       {props.children}
