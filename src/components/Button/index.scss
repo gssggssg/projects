@@ -1,6 +1,6 @@
 // Buttons scss
 .gssgButton{
-  button{
+  &{
     background-color: #363433;
     box-shadow: 0 0 2px 1px #ccc;
     width: 100px;
@@ -8,12 +8,12 @@
     border-radius: 8px;
     cursor: pointer;
   }
-  button:hover{
+  &:hover{
     background-color: #444241;
     box-shadow: 0 0 2px 1px #ccc;
-    cursor:not-allowed;
+    // cursor:not-allowed;
   }
-  button,button:focus{
+  &,&:focus{
     outline: none;
     border: none;
     padding: 10px;
