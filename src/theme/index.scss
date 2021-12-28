@@ -1,16 +1,27 @@
-
-$theme-bright-background: #eee;
-$theme-dark-color: #333;
-$theme-dark-background: #363433;
-$theme-dark-color: #eee;
-
-body{
-  background-color: $theme-dark-background;
+/*
+* index.scss
+*/
+html{
+  font-size: 10px;
 }
-.dark{
-  *{
-    border-color: $theme-dark-color;
-    background-color: $theme-dark-background;
-    color: $theme-dark-color;
-  }
+
+@import './dark.scss';
+
+// 文本选中样式
+*::selection{
+  background-color: var(--bgcolor-selection);
+  color: var(--color);
+}
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  background: var(--bgcolor);
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 0.6rem;
+  box-shadow: inset 0,2rem 0.2rem 1rem #666666
 }
