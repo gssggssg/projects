@@ -1,4 +1,6 @@
 // Buttons scss
+@import '../../../components/gssg.scss';
+
 .buttons{
   width: 94%;
   margin: auto;
@@ -17,12 +19,12 @@
     line-height: 40px;
     display: flex;
     justify-content: space-evenly;
-    box-shadow: 0 0 2px 1px #ccc;
+    box-shadow: var(--shadow-active);
     padding: 4px;
     position: relative;
 
     &:hover{
-      box-shadow: 0 0 6px 1px #ccc;
+      box-shadow: var(--shadow-active);
     }
 
     button{
@@ -40,42 +42,48 @@
       bottom: 0;
       left: -4px;
       margin: auto;
-      background-color: #ccc;
+      background-color: var(--color);
     }
 
     button,input,button:focus,input:focus,button:active {
-      color: #ccc;
+      color: var(--color);
       outline: none;
       background: none;
       border: none;
     }
 
+    button:active{
+      box-shadow: var(--shadow-active);
+    }
+    
     .dropDown{
       position: absolute;
       left: 10px;
       top: 40px;
       z-index: 999;
       min-height: 30px;
-      background-color: #ccc;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
 
       ul{
-        background-color: #363433;
-        box-shadow: 0 0 6px 1px #ccc;
-        padding: 6px;
+        background-color: var(--bgcolor);
+        box-shadow: var(--shadow-active);
+        padding: 0.6rem;
+        border-radius: 0.8rem;
         overflow: hidden;
+
         li{
           background: transparent;
-          color: #ccc;
+          color: var(--color);
         }
+
       }
 
       .defaultDrop{
         text-align: center;
-        line-height: 30px;
+        line-height: 3rem;
         background: transparent;
-        color: #ccc;
+        color: var(--color);
       }
 
     }

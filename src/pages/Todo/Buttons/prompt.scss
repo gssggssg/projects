@@ -2,23 +2,23 @@
 
   .gssgPromptContent{
     position: absolute;
-    width: 300px;
-    height: 200px;
+    width: 30rem;
+    height: 20rem;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    box-shadow: 0 0 4px 1px #aaa;
-    border-radius: 8px;
-    background-color: #363433;
+    box-shadow: var(--shadow-active);
+    border-radius: 0.8rem;
+    background-color: var(--bgcolor);
     z-index: 999999;
 
     .gssgPromptButton{
       width: 100%;
-      height: 50px;
+      height: 5rem;
       position: absolute;
-      bottom: 20;
+      bottom: 2rem;
       left: 0;
       right: 0;
       margin: auto;
@@ -31,8 +31,8 @@
 
     .gssgPromptText{
       text-align: center;
-      line-height: 130px;
-      color: #ccc;
+      line-height: 13rem;
+      color: var(--color);
     }
 
     button{

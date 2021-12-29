@@ -1,13 +1,13 @@
 // Todo>Item scss
 li{
   list-style: none;
-  line-height: 30px;
-  min-height: 30px;
+  line-height: 3rem;
+  min-height: 3rem;
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #ccc;
+  color: var(--color);
   padding: 0 4px;
 }
 
@@ -17,6 +17,6 @@ li:hover{
   border-radius: 4px;
 
   span{
-    color: #ddd;
+    color: var(--color);
   }
 }

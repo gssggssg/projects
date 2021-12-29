@@ -2,28 +2,25 @@
 .blackBg{
   width: 100%;
   overflow: hidden;
-  min-height: calc(100vh - 50px);
-  background-color: #363433;
+  min-height: calc(100vh - 5rem);
+  background-color: var(--bgcolor);
 }
 
 .todobg{
   width: 100%;
   display: flex;
-  padding: 20px;
+  padding: 2rem;
   height: 100%;
   overflow: hidden;
-  background-color: #363433;
+  background-color: var(--bgcolor);
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
-}
-
-.Card{
-  box-shadow: 0 0 6px 1px #aaa;
+  justify-content: space-around;
 }
 
 .leftCard{
-  min-width: 200px;
+  min-width: 20rem;
   margin: 0 auto;
   height: 100%;
 }
