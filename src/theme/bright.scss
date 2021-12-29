@@ -1,0 +1,15 @@
+/*
+* 明亮主题
+*/
+
+:root{
+  --shadow-normal: 0.4rem 0.4rem 0.8rem #b8b9be, -0.2rem -0.2rem 0.6rem #fff;
+  --shadow-hover: 0.4rem 0.4rem 1rem #b8b9be, -2px -2px 8px #fff;
+  --shadow-active: inset 0.6rem 0.6rem 1rem #b8b9be, inset -0.2rem -0.2rem 0.6rem #fff;
+  --border-radius: 0.8rem;
+  --bgcolor-nav: #b8b9be;
+  --bgcolor: #fff;
+  --color: #666;
+  --bgcolor-selection: #fff;
+  --color-selection:#666;
+}

@@ -1,7 +1,7 @@
 // navigation Scss 菜单
 a{
   text-decoration: none;
-  color:#999;
+  color: var(--color);
 }
 
 .navigation{
@@ -12,8 +12,28 @@ a{
   margin: auto;
   position: sticky;
   z-index: 9999;
-  background-color: #4a4035;
+  background-color: var(--bgcolor-nav);
   display: flex;
   justify-content: space-evenly;
-  color:#fff;
+  color: var(--color);
+
+  .ChangeTheme{
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-content: center;
+    box-shadow: var(--shadow-active);
+    border-radius: var(--border-radius);
+    .current{
+      box-shadow:var(--shadow-hover);
+    }
+    span{
+      text-align: center;
+      width: 50%;
+      color: var(  --color);
+    }
+  }
+
 }
