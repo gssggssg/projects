@@ -1,5 +1,4 @@
 // Buttons scss
-@import '../gssg.scss';
 
 .gssgButton{
   &{
@@ -7,7 +6,7 @@
     box-shadow: var(--shadow-normal);
     width: 10rem;
     margin: 1rem;
-    border-radius: 0.8rem;
+    border-radius: var(--border-radius);
     cursor: pointer;
   }
   &:hover{

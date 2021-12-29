@@ -1,0 +1,11 @@
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  background: var(--bgcolor);
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 0.6rem;
+}

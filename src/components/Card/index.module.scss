@@ -1,10 +1,8 @@
 // Home scss
-@import '../gssg.scss';
-
 .gssgCard{
   margin: auto;
   padding: 1rem;
   text-align: center;
   box-shadow: var(--shadow-active);
-  border-radius: 0.8rem;
+  border-radius: var(--border-radius);
 }

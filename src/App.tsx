@@ -3,16 +3,17 @@ import { connect } from "react-redux";
 import { renderRoutes, RouteConfig } from "react-router-config";
 import routes from "./routes";
 import Navigation from "./pages/Navigation";
+import Theme from "./components/Themes";
 
 const App = (props: any) => {
   const { theme } = props.global;
-  theme === "dark" && import("./theme/dark.scss");
-  theme === "bright" && import("./theme/bright.scss");
   return (
-    <div className="">
-      <Navigation />
-      {renderRoutes(routes as RouteConfig[])}
-    </div>
+    <Theme theme={theme === "bright" ? "bright" : "dark"}>
+      <>
+        <Navigation />
+        {renderRoutes(routes as RouteConfig[])}
+      </>
+    </Theme>
   );
 };
 

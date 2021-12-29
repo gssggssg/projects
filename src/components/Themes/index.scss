@@ -1,0 +1,18 @@
+/*
+* gssg.scss
+*/
+html{
+  font-size: 10px;
+}
+
+// 文本选中样式
+.choose{
+  *::selection{
+    background-color: var(--bgcolor-selection);
+    color: var(--color);
+  }
+}
+
+.gssgTheme{
+  --border-radius:8px;
+}

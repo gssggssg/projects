@@ -1,7 +1,5 @@
 import React, { } from 'react';
 import { connect } from "react-redux";
-// import bright from "../../theme/bright.scss";
-// import dark from "../../theme/dark.scss";
 import "./index.scss";
 
 interface Props {
