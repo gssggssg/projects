@@ -11,3 +11,7 @@
   --bgcolor-selection: #363433;
   --color-selection:#ccc;
 }
+// 防止黑色背景图片太刺眼
+img{
+  filter: brightness(0.9);
+ }

@@ -5,7 +5,8 @@ html{
   font-size: 10px;
 }
 
-@import './theme/dark.scss';
+// @import './theme/dark.scss';
+@import './theme/bright.scss';
 
 // 文本选中样式
 *::selection{
