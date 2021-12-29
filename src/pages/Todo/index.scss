@@ -3,7 +3,7 @@
   width: 100%;
   overflow: hidden;
   min-height: calc(100vh - 5rem);
-  background-color: var(--bgcolor);
+  background-color: var(--gssg-bgcolor);
 }
 
 .todobg{
@@ -12,7 +12,7 @@
   padding: 2rem;
   height: 100%;
   overflow: hidden;
-  background-color: var(--bgcolor);
+  background-color: var(--gssg-bgcolor);
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;

@@ -3,22 +3,22 @@
 .gssgButton{
   &{
     background: transparent;
-    box-shadow: var(--shadow-normal);
+    box-shadow: var(--gssg-shadow-normal);
     width: 10rem;
     margin: 1rem;
-    border-radius: var(--border-radius);
+    border-radius: var(--gssg-border-radius);
     cursor: pointer;
   }
   &:hover{
-    box-shadow: var(--shadow-hover);
+    box-shadow: var(--gssg-shadow-hover);
   }
   &:active{
-    box-shadow: var(--shadow-active);
+    box-shadow: var(--sgssg-hadow-active);
   }
   &,&:focus{
     outline: none;
     border: none;
     padding: 1rem;
-    color: var(--color);
+    color: var(--gssg-color);
   }
 }

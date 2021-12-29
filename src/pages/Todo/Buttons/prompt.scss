@@ -9,9 +9,9 @@
     left: 0;
     right: 0;
     margin: auto;
-    box-shadow: var(--shadow-active);
+    box-shadow: var(--gssg-shadow-active);
     border-radius: 0.8rem;
-    background-color: var(--bgcolor);
+    background-color: var(--gssg-bgcolor);
     z-index: 999999;
 
     .gssgPromptButton{
@@ -32,7 +32,7 @@
     .gssgPromptText{
       text-align: center;
       line-height: 13rem;
-      color: var(--color);
+      color: var(--gssg-color);
     }
 
     button{

@@ -8,7 +8,7 @@
     line-height: 3rem;
     padding: 1rem;
     background-color: transparent;
-    color: var(--color);
+    color: var(--gssg-color);
     font-size: 22px;
     font-weight: bold;
   }
@@ -29,7 +29,7 @@
     z-index: 99;  
     padding: 1.4rem;
     resize:none;
-    background-color: var(--bgcolor);
+    background-color: var(--gssg-bgcolor);
   }
   pre{
     visibility: hidden;
@@ -50,7 +50,7 @@
     width: 100% !important;
     height: 100% !important;
     border: none;
-    color: var(--color);
+    color: var(--gssg-color);
     line-height: 24px;
     font-size: 14px;
   }

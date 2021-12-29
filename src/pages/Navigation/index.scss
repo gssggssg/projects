@@ -1,7 +1,7 @@
 // navigation Scss 菜单
 a{
   text-decoration: none;
-  color: var(--color);
+  color: var(--gssg-color);
 }
 
 .navigation{
@@ -12,10 +12,10 @@ a{
   margin: auto;
   position: sticky;
   z-index: 9999;
-  background-color: var(--bgcolor-nav);
+  background-color: var(--gssg-bgcolor-nav);
   display: flex;
   justify-content: space-evenly;
-  color: var(--color);
+  color: var(--gssg-color);
 
   .ChangeTheme{
     width: 5rem;
@@ -24,15 +24,15 @@ a{
     justify-content: space-evenly;
     flex-direction: row;
     align-content: center;
-    box-shadow: var(--shadow-active);
-    border-radius: var(--border-radius);
+    box-shadow: var(--gssg-shadow-active);
+    border-radius: var(--gssg-border-radius);
     .current{
-      box-shadow:var(--shadow-hover);
+      box-shadow:var(--gssg-shadow-hover);
     }
     span{
       text-align: center;
       width: 50%;
-      color: var(  --color);
+      color: var(--gssg-color);
     }
   }
 

@@ -18,12 +18,12 @@
     line-height: 40px;
     display: flex;
     justify-content: space-evenly;
-    box-shadow: var(--shadow-active);
+    box-shadow: var(--gssg-shadow-active);
     padding: 4px;
     position: relative;
 
     &:hover{
-      box-shadow: var(--shadow-active);
+      box-shadow: var(--gssg-shadow-active);
     }
 
     button{
@@ -41,18 +41,18 @@
       bottom: 0;
       left: -4px;
       margin: auto;
-      background-color: var(--color);
+      background-color: var(--gssg-color);
     }
 
     button,input,button:focus,input:focus,button:active {
-      color: var(--color);
+      color: var(--gssg-color);
       outline: none;
       background: none;
       border: none;
     }
 
     button:active{
-      box-shadow: var(--shadow-active);
+      box-shadow: var(--gssg-shadow-active);
     }
     
     .dropDown{
@@ -65,15 +65,15 @@
       border-bottom-right-radius: 16px;
 
       ul{
-        background-color: var(--bgcolor);
-        box-shadow: var(--shadow-active);
+        background-color: var(--gssg-bgcolor);
+        box-shadow: var(--gssg-shadow-active);
         padding: 0.6rem;
         border-radius: 0.8rem;
         overflow: hidden;
 
         li{
           background: transparent;
-          color: var(--color);
+          color: var(--gssg-color);
         }
 
       }
@@ -82,7 +82,7 @@
         text-align: center;
         line-height: 3rem;
         background: transparent;
-        color: var(--color);
+        color: var(--gssg-color);
       }
 
     }

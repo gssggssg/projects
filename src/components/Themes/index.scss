@@ -8,11 +8,13 @@ html{
 // 文本选中样式
 .choose{
   *::selection{
-    background-color: var(--bgcolor-selection);
-    color: var(--color);
+    background-color: var(--gssg-bgcolor-selection);
+    color: var(--gssg-color);
   }
 }
 
 .gssgTheme{
-  --border-radius:8px;
+  --gssg-border-radius:8px;
+  --gssg-border-radius-small:4px;
+  --gssg-border-radius-big:16px;
 }

@@ -7,16 +7,17 @@ li{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--color);
+  color: var(--gssg-color);
   padding: 0 4px;
 }
 
 li:hover{
   cursor: pointer;
-  background-color: #444241;
-  border-radius: 4px;
+  background-color: var(--gssg-bgcolor-hover);
+  color: var(--gssg-color-hover);
+  border-radius: var(--gssg-border-radius-small);
 
   span{
-    color: var(--color);
+    color: var(--gssg-color);
   }
 }
