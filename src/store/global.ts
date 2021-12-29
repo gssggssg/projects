@@ -8,11 +8,11 @@ export interface globalType {
 };
 
 const state: globalType = {
-  theme: "black",
+  theme: "dark",
 };
 
 export const global = createSlice({
-  name: "home",
+  name: "global",
   initialState: state,
   reducers: {
     updata: (state, { payload }) => {
