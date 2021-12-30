@@ -16,7 +16,6 @@ interface Props {
 
 const InputBox = (props: Props): JSX.Element => {
   const { isEdit, currentData } = props;
-  console.log(currentData);
   const { value, title, id } = currentData;
   const oninput = (event: any): void => {
     const parameter: any = {

@@ -83,11 +83,8 @@ const Buttons = (props: Props): JSX.Element => {
     setDropShow(false);
   };
 
-  console.log(dropDown);
-
   return (
     <div className='buttons'>
-      {/* <div className='search' onFocus={dropDownShow} onBlur={dropDownShowFalse}> */}
       <div className='search' onFocus={dropDownShow}>
         <input placeholder='请输入您要查找的' onInput={search} />
         <button onClick={search}>搜索</button>
@@ -96,7 +93,7 @@ const Buttons = (props: Props): JSX.Element => {
             <ul>
               {
                 dropDown.length > 0 ?
-                  dropDown?.map((item: { title: string, id: string, value: string }): JSX.Element => {
+                  dropDown?.map((item: { title: string, id: string }): JSX.Element => {
                     return (<li key={item.id} onClick={() => nihaoya(item)}>
                       <span>{item.title}</span>
                     </li>);
