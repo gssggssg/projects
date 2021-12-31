@@ -23,9 +23,6 @@ interface Props {
 const Button: React.FC<Props> = (props: Props): JSX.Element => {
   const { style, className, width, height, disabled, onClick } = props;
   const gssgDisabled = disabled ? disabled : false;
-  // const gssgWidth = typeof width === "string" ? width : `${width}px`;
-  // const gssgHeight= typeof height === "string" ? height : `${height}px`;
-  // const gssgOnClick = gssgDisabled ? onClick : null;
   return (
     <button
       className={`${styles.gssgButton} ${className || ""}`}
