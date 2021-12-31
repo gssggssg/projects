@@ -1,6 +1,6 @@
 import React, { } from 'react';
 import { connect } from "react-redux";
-import "./index.scss";
+import style from "./index.module.scss";
 
 interface Props {
   navigation: {
@@ -27,7 +27,7 @@ const Navigation = (props: Props): JSX.Element => {
     });
   };
   return (
-    <nav className="navigation">
+    <nav className={style.navigation}>
       {
         navigation.menu?.length > 0 &&
         navigation.menu?.map((item: { title: string, path: string }) => {
@@ -37,9 +37,13 @@ const Navigation = (props: Props): JSX.Element => {
         },
         )
       }
-      <div className='ChangeTheme' >
-        <span className={global.theme === "bright" ? "current" : ""} onClick={ChangeTheme}>明</span>
-        <span className={global.theme === "dark" ? "current" : ""} onClick={ChangeTheme}>暗</span>
+      <div className={style.ChangeTheme} >
+        <span className={global.theme === "bright" ? style.current : ""} onClick={ChangeTheme}>
+          明
+        </span>
+        <span className={global.theme === "dark" ? style.current : ""} onClick={ChangeTheme}>
+          暗
+        </span>
       </div>
     </nav>
   );

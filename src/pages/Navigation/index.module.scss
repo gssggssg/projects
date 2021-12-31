@@ -1,8 +1,4 @@
 // navigation Scss 菜单
-a{
-  text-decoration: none;
-  color: var(--gssg-color);
-}
 
 .navigation{
   width: 100%;
@@ -36,4 +32,8 @@ a{
     }
   }
 
+  a{
+    text-decoration: none;
+    color: var(--gssg-color);
+  }
 }
