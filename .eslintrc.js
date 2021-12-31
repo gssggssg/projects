@@ -28,7 +28,8 @@ module.exports = {
     "quotes": "double",
     "require-jsdoc":0, // 禁止使用 函数注释
     "valid-jsdoc": 0,//jsdoc规则
-    "max-len": ["error", {code : 100}]  // 此处为具体添加代码
+    "max-len": ["error", {code : 100}],  // 此处为具体添加代码
+    "linebreak-style": ["error", "windows"], // 声明这是windows操作系统即可。
   },
 
 };
