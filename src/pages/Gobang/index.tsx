@@ -1,10 +1,10 @@
 import * as React from "react";
 import Card from "../../components/Card";
-import "./index.scss";
+import style from "./index.module.scss";
 
 const Gobang = (): JSX.Element => {
   return (
-    <div className="interface">
+    <div className={style.interface}>
       <Card width="50%" height="400px" >
         <div style={{ lineHeight: "400px" }}>这里是Gobang-页面</div>
       </Card>
