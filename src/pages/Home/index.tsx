@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { homeType } from "../../store/home";
 import Card from "../../components/Card";
-import "./index.scss";
+import style from "./index.module.scss";
 
 interface Props {
   home: homeType,
@@ -11,7 +11,7 @@ interface Props {
 
 const Home = (props: Props): JSX.Element => {
   return (
-    <div className="homeContent">
+    <div className={style.homeContent}>
       <Card width="50%" height="400px" >
         <div style={{ lineHeight: "384px" }}>这里是首页</div>
       </Card>
