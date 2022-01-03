@@ -3,7 +3,7 @@
  */
 import * as React from "react";
 import { connect } from "react-redux";
-import style from "./index.module.scss";
+import styles from "./food.module.scss";
 
 interface Props {
   state: any;
@@ -11,7 +11,7 @@ interface Props {
 
 const Food = (props: Props): JSX.Element => {
   return (
-    <div className={style.food}>
+    <div className={styles.food}>
       <div></div>
     </div>
   );
