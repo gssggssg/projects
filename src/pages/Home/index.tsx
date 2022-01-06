@@ -4,12 +4,11 @@ import { homeType } from "../../store/home";
 import Card from "../../components/Card";
 import style from "./index.module.scss";
 
-interface Props {
+type HomeProps = {
   home: homeType,
-  dispatch: any,
 };
 
-const Home = (props: Props): JSX.Element => {
+const Home: React.FC<HomeProps> = ({ home }): JSX.Element => {
   return (
     <div className={style.homeContent}>
       <Card width="50%" height="400px" >

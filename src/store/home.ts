@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface homeType {
-
 };
 
 const state: homeType = {
-
 };
 
 export const home = createSlice({
