@@ -2,7 +2,10 @@ import * as React from "react";
 import Card from "../../components/Card";
 import style from "./index.module.scss";
 
-const Gobang = (): JSX.Element => {
+type GobangProps = {
+};
+
+const Gobang: React.FC<GobangProps> = (): JSX.Element => {
   return (
     <div className={style.interface}>
       <Card width="50%" height="400px" >
