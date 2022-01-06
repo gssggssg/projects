@@ -5,8 +5,12 @@ import routes from "./routes";
 import Navigation from "./pages/Navigation";
 import Theme from "./components/Themes";
 
-const App = (props: any) => {
-  const { theme } = props.global;
+type AppProps = {
+  global: { theme: string };
+};
+
+const App: React.FC<AppProps> = ({ global }) => {
+  const { theme } = global;
   return (
     <Theme theme={theme === "bright" ? "bright" : "dark"}>
       <>
