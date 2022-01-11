@@ -63,7 +63,6 @@ export const todo = createSlice({
       return { ...state, data };
     },
     updata: (state, { payload }) => {
-      console.log(payload);
       return { ...state, ...payload };
     },
   },
