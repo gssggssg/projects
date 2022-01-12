@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface snakeType {
+export interface SnakeTypes {
   score: number,
   level: number,
 };
 
-const state: snakeType = {
+const state: SnakeTypes = {
   score: 0,
   level: 1,
 };

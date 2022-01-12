@@ -1,12 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import Food from "./food";
-import { snakeType } from "../../store/snake";
 import styles from "./index.module.scss";
+import { SnakeType } from 'src/type';
+import { AnyAction } from "redux";
 
 interface Props {
-  snake: snakeType,
-  dispatch: any,
+  snake: SnakeType,
+  dispatch: React.Dispatch<AnyAction>,
 };
 
 const Snake = (props: Props): JSX.Element => {
@@ -30,7 +31,7 @@ const Snake = (props: Props): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: { snake: snakeType }) => ({
+const mapStateToProps = (state: { snake: SnakeType }) => ({
   snake: state.snake,
 });
 

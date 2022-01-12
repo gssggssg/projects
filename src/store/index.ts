@@ -5,7 +5,6 @@ import snake from './snake';
 import home from './home';
 import todo from './todo';
 
-
 const store = configureStore({
   reducer: {
     global,

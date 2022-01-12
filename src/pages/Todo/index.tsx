@@ -1,7 +1,7 @@
 // import * as React from "react";
 import React, { } from 'react';
 import { connect } from "react-redux";
-import { todoType } from "../../store/todo";
+import { TodoTypes } from "../../store/todo";
 import Card from "../../components/Card";
 import InputBox from "./InputBox";
 import ItemList from "./ItemList";
@@ -9,7 +9,7 @@ import Buttons from "./Buttons";
 import "./index.scss";
 
 interface Props {
-  todo: todoType,
+  todo: TodoTypes,
   dispatch: any,
 };
 
@@ -31,7 +31,7 @@ const Todo = (props: Props): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: { todo: todoType }) => ({
+const mapStateToProps = (state: { todo: TodoTypes }) => ({
   todo: state.todo,
 });
 

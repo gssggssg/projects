@@ -3,11 +3,11 @@
  */
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface GlobalType {
+export interface GlobalTypes {
   theme: string,
 };
 
-const state: GlobalType = {
+const state: GlobalTypes = {
   theme: "dark",
 };
 

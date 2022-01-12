@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface homeType {
+export interface HomeTypes {
 };
 
-const state: homeType = {
+const state: HomeTypes = {
 };
 
 export const home = createSlice({

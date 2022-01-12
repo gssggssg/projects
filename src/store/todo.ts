@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import guid from "../methods/UUID";
-export interface todoDataType {
+export interface TodoDataType {
   [x: string]: any;
   [index: number]: {
     id: number,
@@ -8,17 +8,17 @@ export interface todoDataType {
     title: string;
   },
 };
-export interface todoType {
-  data: todoDataType,
-  currentData: todoDataType,
+export interface TodoTypes {
+  data: TodoDataType,
+  currentData: TodoDataType,
   isEdit: boolean,
 };
 
-const todoData: todoDataType =
+const todoData: TodoDataType =
   JSON.parse(localStorage.getItem('todoData') as string) ||
   [{ id: 1, value: "给读者的一封信！", title: "给读者的一封信，信是这样写的" }];
 
-const states: todoType = {
+const states: TodoTypes = {
   data: todoData,
   currentData: todoData[0],
   isEdit: true,
@@ -34,7 +34,7 @@ export const todo = createSlice({
     // 保存
     saveData: (state, { payload }) => {
       let exist = true;
-      const data = todoData.map((item: todoDataType[0]): todoDataType => {
+      const data = todoData.map((item: TodoDataType[0]): TodoDataType => {
         if (item.id === payload.currentData.id) {
           exist = false;
           return payload.currentData;
@@ -54,7 +54,7 @@ export const todo = createSlice({
     },
     // 删除
     deleteData: (state, { payload }) => {
-      const data = todoData.filter((item: todoDataType[0]) => {
+      const data = todoData.filter((item: TodoDataType[0]) => {
         return item.id !== payload.currentData.id;
       });
       localStorage.setItem('todoData', JSON.stringify(data));

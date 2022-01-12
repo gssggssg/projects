@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type Menu = { title: string, path: string };
 
-export interface SliceState {
+export interface NavigationTypes {
   menu: Menu[];
 };
 
-const initialState: SliceState = {
+const initialState: NavigationTypes = {
   menu: [
     {
       title: "Home",

@@ -1,11 +1,11 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { homeType } from "../../store/home";
 import Card from "../../components/Card";
 import style from "./index.module.scss";
+import { HomeType } from 'src/type';
 
 type HomeProps = {
-  home: homeType,
+  home: HomeType,
 };
 
 const Home: React.FC<HomeProps> = ({ home }): JSX.Element => {
@@ -18,7 +18,7 @@ const Home: React.FC<HomeProps> = ({ home }): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: { home: homeType }) => ({
+const mapStateToProps = (state: { home: HomeType }) => ({
   home: state.home,
 });
 
