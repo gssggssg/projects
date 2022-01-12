@@ -1,13 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface SliceState {
-  menu: {
-    [index: number]: {
-      title: string;
-      path: string;
-    },
-  }
-}
+type Menu = { title: string, path: string };
+
+export interface SliceState {
+  menu: Menu[];
+};
 
 const initialState: SliceState = {
   menu: [
@@ -34,7 +31,7 @@ export const navigation = createSlice({
   name: 'navigation',
   initialState,
   reducers: {
-    updata: (state, {payload}) => {
+    updata: (state, { payload }) => {
       return { ...state, ...payload };
     },
   },

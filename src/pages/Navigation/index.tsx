@@ -1,21 +1,15 @@
 import React, { } from 'react';
 import { connect } from "react-redux";
 import style from "./index.module.scss";
+import { SliceState } from "../../store/navigation";
 
 interface Props {
-  navigation: {
-    menu: [
-      {
-        title: string;
-        path: string;
-      },
-    ]
-  },
+  navigation: SliceState
   global: { theme: string };
   dispatch: any,
 };
 
-const Navigation = (props: Props): JSX.Element => {
+const Navigation: React.FC<Props> = (props: Props): JSX.Element => {
   const { navigation, global } = props;
   const ChangeTheme = (): void => {
     let theme = "dark";
@@ -34,8 +28,7 @@ const Navigation = (props: Props): JSX.Element => {
           return (
             <a key={item.path} href={item.path} > {item.title} </a>
           );
-        },
-        )
+        })
       }
       <div className={style.ChangeTheme} >
         <span className={global.theme === "bright" ? style.current : ""} onClick={ChangeTheme}>
@@ -48,7 +41,6 @@ const Navigation = (props: Props): JSX.Element => {
     </nav>
   );
 };
-
 
 const mapStateToProps = (state: any) => ({
   navigation: state.navigation,
