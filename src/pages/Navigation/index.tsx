@@ -2,11 +2,13 @@ import React, { } from 'react';
 import { connect } from "react-redux";
 import style from "./index.module.scss";
 import { SliceState } from "../../store/navigation";
+import { GlobalType } from "../../store/global";
+import { AnyAction } from 'redux';
 
 interface Props {
-  navigation: SliceState
-  global: { theme: string };
-  dispatch: any,
+  navigation: SliceState,
+  global: GlobalType,
+  dispatch: React.Dispatch<AnyAction>,
 };
 
 const Navigation: React.FC<Props> = (props: Props): JSX.Element => {
@@ -42,7 +44,7 @@ const Navigation: React.FC<Props> = (props: Props): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: { navigation: SliceState; global: GlobalType; }) => ({
   navigation: state.navigation,
   global: state.global,
 });
