@@ -26,9 +26,7 @@ const Navigation: React.FC<Props> = (props: Props): JSX.Element => {
       {
         navigation.menu?.length > 0 &&
         navigation.menu?.map((item: { title: string, path: string }) => {
-          return (
-            <a key={item.path} href={item.path} > {item.title} </a>
-          );
+          return (<a key={item.path} href={item.path} > {item.title} </a>);
         })
       }
       <div className={style.ChangeTheme} >
