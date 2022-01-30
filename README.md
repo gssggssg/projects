@@ -13,3 +13,7 @@ npm i
 ```git
 npm start
 ```
+3. 打包
+```
+npm build
+```
