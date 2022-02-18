@@ -6,11 +6,11 @@ Redux React-Redux react-router
 CSS Modules
 
 1. 下载依赖
-```git
+```
 npm i
 ```
 2. 运行实例
-```git
+```
 npm start
 ```
 3. 打包
