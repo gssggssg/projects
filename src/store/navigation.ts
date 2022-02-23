@@ -24,6 +24,10 @@ const initialState: NavigationTypes = {
       title: "五子棋",
       path: "gobang",
     },
+    {
+      title: "项目列表",
+      path: "FSProjectList",
+    },
   ],
 };
 

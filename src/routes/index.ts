@@ -3,6 +3,8 @@ import Home from '../pages/Home';
 import Todo from '../pages/Todo';
 import Snake from '../pages/Snake';
 import Gobang from '../pages/Gobang';
+import FSProjectList from '../pages/FSProjectList';
+
 // 导入路由管理工具
 import { RouteConfig } from 'react-router-config';
 
@@ -31,6 +33,11 @@ const routes: RouteConfig = [
     path: '/gobang',
     exact: true,
     component: Gobang,
+  },
+  {
+    path: '/FSProjectList',
+    exact: true,
+    component: FSProjectList,
   },
 ];
 
