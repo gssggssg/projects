@@ -13,9 +13,9 @@ type FSProps = {
 const FSProjectList: React.FC<FSProps> = ({ home }): JSX.Element => {
   return (
     <div className={style.homeContent}>
-      <Card width="50%" height="400px" >
+      <Card width="50%" height="40px" >
         <>
-          <div style={{ lineHeight: "384px" }}>扶桑</div>
+          <div style={{ lineHeight: "30px" }}>扶桑</div>
           <ItemList />
         </>
       </Card>
