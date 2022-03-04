@@ -1,4 +1,5 @@
 import * as React from "react";
+import classnames from "classnames";
 import styles from "./index.module.scss";
 
 interface Props {
@@ -20,12 +21,13 @@ interface Props {
  * @param disabled Card的是否禁用，false(默认) 按钮可以点击 true 按钮不可点击为禁用状态
  * @param loading Card的loading状态，false(默认) 不再loading 状态，true进行loading状态
  */
+
 const Button: React.FC<Props> = (props: Props): JSX.Element => {
   const { style, className, width, height, disabled, onClick } = props;
   const gssgDisabled = disabled ? disabled : false;
   return (
     <button
-      className={`${styles.gssgButton} ${className || ""}`}
+      className={classnames(styles["gssg-but"], className)}
       style={{ ...style, width, height }}
       disabled={gssgDisabled}
       onClick={onClick}

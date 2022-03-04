@@ -6,7 +6,7 @@ html{
 }
 
 // 文本选中样式
-.choose{
+.textSelect{
   *::selection{
     background-color: var(--gssg-bgcolor-selection);
     color: var(--gssg-color);
