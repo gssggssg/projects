@@ -14,12 +14,13 @@ interface Props {
 };
 
 /**
- * @param style Card的样式
- * @param className Card的类名
- * @param width Card的宽，数字类型单位就为px
- * @param height Card的高，数字类型单位就为px
- * @param disabled Card的是否禁用，false(默认) 按钮可以点击 true 按钮不可点击为禁用状态
- * @param loading Card的loading状态，false(默认) 不再loading 状态，true进行loading状态
+ * @param style Button的样式
+ * @param className Button的类名
+ * @param width Button的宽，数字类型单位就为px
+ * @param height Button的高，数字类型单位就为px
+ * @param disabled Button的是否禁用，false(默认) 按钮可以点击 true 按钮不可点击为禁用状态
+ * @param loading Button的loading状态，false(默认) 不再loading 状态，true进行loading状态
+ * @param onClick Button的单击响应事件
  */
 
 const Button: React.FC<Props> = (props: Props): JSX.Element => {
