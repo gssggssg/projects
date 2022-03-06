@@ -4,8 +4,8 @@
 
 .gssgThemeDark{
   --gssg-shadow-normal: 0.4rem 0.4rem 0.8rem #1c1c1c, -0.2rem -0.2rem 0.6rem #aeaeae;
-  --gssg-shadow-hover: 0.4rem 0.4rem 1rem #0c0c0c, -2px -2px 8px #cecece;
-  --gssg-shadow-active: inset 0.6rem 0.6rem 1rem #1c1c1c, inset -0.2rem -0.2rem 0.6rem #808080;
+  --gssg-shadow-hover: 0.4rem 0.4rem 0.8rem #0c0c0c, -0.2rem -0.2rem 0.8rem  #cecece;
+  --gssg-shadow-inset: inset 0.6rem 0.6rem 1rem #1c1c1c, inset -0.2rem -0.2rem 0.6rem #808080;
   --gssg-bgcolor-nav: #4a4035;
   --gssg-bgcolor: #363433;
   --gssg-color: #ccc;
