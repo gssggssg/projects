@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import Card from "../../components/Card";
 import style from "./index.module.scss";
-import { HomeType } from 'src/type';
+import { HomeType } from "src/type";
 
 type HomeProps = {
   home: HomeType,

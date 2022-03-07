@@ -32,7 +32,7 @@ const initialState: NavigationTypes = {
 };
 
 export const navigation = createSlice({
-  name: 'navigation',
+  name: "navigation",
   initialState,
   reducers: {
     updata: (state, { payload }) => {

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import guid from "../methods/UUID";
+
 export interface TodoDataType {
   [x: string]: any;
   [index: number]: {
@@ -15,7 +16,7 @@ export interface TodoTypes {
 };
 
 const todoData: TodoDataType =
-  JSON.parse(localStorage.getItem('todoData') as string) ||
+  JSON.parse(localStorage.getItem("todoData") as string) ||
   [{ id: 1, value: "给读者的一封信！", title: "给读者的一封信，信是这样写的" }];
 
 const states: TodoTypes = {
@@ -42,9 +43,9 @@ export const todo = createSlice({
         return item;
       });
       exist && data.unshift(payload.currentData);
-      localStorage.setItem('todoData', JSON.stringify(data));
-      JSON.parse(localStorage.getItem('todoData') as string);
-      location.reload();
+      localStorage.setItem("todoData", JSON.stringify(data));
+      JSON.parse(localStorage.getItem("todoData") as string);
+      // location.reload();
       return { ...state, data };
     },
     // 新增
@@ -57,8 +58,8 @@ export const todo = createSlice({
       const data = todoData.filter((item: TodoDataType[0]) => {
         return item.id !== payload.currentData.id;
       });
-      localStorage.setItem('todoData', JSON.stringify(data));
-      JSON.parse(localStorage.getItem('todoData') as string);
+      localStorage.setItem("todoData", JSON.stringify(data));
+      JSON.parse(localStorage.getItem("todoData") as string);
       location.reload();
       return { ...state, data };
     },

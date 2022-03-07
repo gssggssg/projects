@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import Food from "./food";
 import styles from "./index.module.scss";
-import { SnakeType } from 'src/type';
+import { SnakeType } from "src/type";
 import { AnyAction } from "redux";
 
 interface Props {
