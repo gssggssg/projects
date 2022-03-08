@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { renderRoutes, RouteConfig } from "react-router-config";
 import routes from "./routes";
-import Navigation from "./pages/Navigation";
+// import Navigation from "./pages/Navigation";
 import Theme from "./components/Themes";
 
 type AppProps = {
@@ -14,7 +14,7 @@ const App: React.FC<AppProps> = ({ global }) => {
   return (
     <Theme theme={theme === "bright" ? "bright" : "dark"}>
       <>
-        <Navigation />
+        {/* <Navigation /> */}
         {renderRoutes(routes as RouteConfig[])}
       </>
     </Theme>

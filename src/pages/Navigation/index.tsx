@@ -1,8 +1,9 @@
-import React, { } from 'react';
+import React, { } from "react";
 import { connect } from "react-redux";
 import style from "./index.module.scss";
-import { AnyAction } from 'redux';
-import { GlobalType, NavigationType } from 'src/type';
+import { AnyAction } from "redux";
+import Switch from "../../components/Switch";
+import { GlobalType, NavigationType } from "src/type";
 
 interface Props {
   navigation: NavigationType,
@@ -23,6 +24,7 @@ const Navigation: React.FC<Props> = (props: Props): JSX.Element => {
   };
   return (
     <nav className={style.navigation}>
+      <Switch openText="打开" guanText="关闭" />
       {
         navigation.menu?.length > 0 &&
         navigation.menu?.map((item: { title: string, path: string }) => {

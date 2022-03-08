@@ -1,4 +1,12 @@
 // LogIn Scss
+.blackBg{
+    width: 100%;
+    overflow: hidden;
+    min-height: calc(100vh);
+    // background-color: var(--gssg-bgcolor);
+    background: url('../../images/loginBg.jpg') 100% 100%;
+}
+  
 .form{
     display: flex;
     flex-direction: column;

@@ -13,8 +13,12 @@ html{
   }
 }
 
+*{
+  color: var(--gssg-color);
+}
+
 .gssg-theme{
   --gssg-border-radius: 0.8rem;
   --gssg-border-radius-small: 0.4rem;
-  --gssg-border-radius-big: 1.6rem;
+  --gssg-border-radius-big: 1.2rem;
 }

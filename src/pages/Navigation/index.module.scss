@@ -11,6 +11,7 @@
   background-color: var(--gssg-bgcolor-nav);
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   color: var(--gssg-color);
 
   .ChangeTheme{
@@ -20,7 +21,7 @@
     justify-content: space-evenly;
     flex-direction: row;
     align-content: center;
-    box-shadow: var(--gssg-shadow-active);
+    box-shadow: var(--gssg-shadow-inset);
     border-radius: var(--gssg-border-radius);
     .current{
       box-shadow:var(--gssg-shadow-hover);

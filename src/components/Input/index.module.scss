@@ -6,10 +6,12 @@
   line-height: 1;
   border: 0;
   outline: 0;
-  border-radius: var(--gssg-border-radius-big);
+  border-radius: var(--gssg-border-radius);
   padding: 1.2rem;
   margin: 1rem;
-  text-shadow: 1px 1px 2px var(--gssg-color);
+  background: transparent;
+  color: var(--gssg-color);
+  // text-shadow: 1px 1px 2px var(--gssg-color);
   box-shadow: var(--gssg-shadow-inset);
   // box-shadow: inset 2px 2px 5px  var(--gssg-bgcolor), inset -0.2rem -5px 10px var(--gssg-color);
   box-sizing: border-box;
