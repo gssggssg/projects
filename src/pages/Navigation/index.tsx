@@ -2,7 +2,6 @@ import React, { } from "react";
 import { connect } from "react-redux";
 import style from "./index.module.scss";
 import { AnyAction } from "redux";
-import Switch from "../../components/Switch";
 import { GlobalType, NavigationType } from "src/type";
 
 interface Props {
