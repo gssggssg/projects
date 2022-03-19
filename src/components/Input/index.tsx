@@ -26,16 +26,18 @@ const Input: React.FC<Props> = (props: Props): JSX.Element => {
   const { onInput, onChange } = props;
 
   return (
-    <input
-      type="text"
-      value={value}
-      placeholder={placeholder}
-      style={style}
-      disabled={disabled}
-      className={classnames(styles["gssg-inp"], className)}
-      onInput={(event) => onInput && onInput(event)}
-      onChange={(event) => onChange && onChange(event)}
-    />
+    <div className={classnames(styles["gssg-input"], className)}>
+      <input
+        type="text"
+        value={value}
+        placeholder={placeholder}
+        style={style}
+        disabled={disabled}
+        className={classnames(styles["gssg-inp"], className)}
+        onInput={(event) => onInput && onInput(event)}
+        onChange={(event) => onChange && onChange(event)}
+      />
+    </div>
   );
 };
 
