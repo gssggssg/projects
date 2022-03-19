@@ -5,6 +5,7 @@
     min-height: calc(100vh);
     background-color: var(--gssg-bgcolor);
     background: url('../../images/loginBg.jpg') 100% 100%;
+    display: flex;
 }
   
 .form{
@@ -14,4 +15,23 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    .formTitle{
+        line-height: 5rem;
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+    .formList{
+        width: 100%;
+        font-size: 1.4rem;
+        .listItem{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            .listItemLabel{
+                width: 10rem;
+                max-width: 20rem;
+                text-align: right;
+            }
+        }
+    }
 }

@@ -14,7 +14,6 @@ const LogIn: React.FC<LogInType> = (props: LogInType): JSX.Element => {
     <div className={styles.blackBg}>
       <Card width={600} >
         <>
-          注册与登录页面
           <SignUp dispatch={dispatch} />
         </>
       </Card>
