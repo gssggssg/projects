@@ -8,11 +8,11 @@ const instance = axios.create({
 });
 
 // 添加请求拦截器
-instance.interceptors.request.use(function (config) {
+instance.interceptors.request.use(function(config) {
   // 在发送请求之前做些什么
   // config.headers["token"] = getToken();
   return config;
-}, function (error) {
+}, function(error) {
   // 对请求错误做些什么
   return Promise.reject(error);
 });
@@ -20,9 +20,9 @@ instance.interceptors.request.use(function (config) {
 
 // 添加响应拦截器
 
-instance.interceptors.response.use(function (response) {
+instance.interceptors.response.use(function(response) {
   return response.data;
-}, function (error) {
+}, function(error) {
   return Promise.reject(error);
 });
 
