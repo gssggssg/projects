@@ -27,42 +27,44 @@ const SignUp: React.FC<SignInType> = (props): JSX.Element => {
         注册页面
       </div>
       <div className={styles.formList}>
-        <div className={styles.listItem}>
-          <div className={styles.listItemLabel}>
-            账号:
+        <form>
+          <div className={styles.listItem}>
+            <div className={styles.listItemLabel}>
+              账号:
+            </div>
+            <Input
+              placeholder="请输入账号"
+              onChange={(e: any) => formChange("username", e.target.value)}
+            />
           </div>
-          <Input
-            placeholder="请输入账号"
-            onChange={(e: any) => formChange("username", e.target.value)}
-          />
-        </div>
-        <div className={styles.listItem}>
-          <div className={styles.listItemLabel}>
-            邮箱:
+          <div className={styles.listItem}>
+            <div className={styles.listItemLabel}>
+              邮箱:
+            </div>
+            <Input
+              placeholder="请输入邮件"
+              onChange={(e: any) => formChange("email", e.target.value)}
+            />
           </div>
-          <Input
-            placeholder="请输入邮件"
-            onChange={(e: any) => formChange("email", e.target.value)}
-          />
-        </div>
-        <div className={styles.listItem}>
-          <div className={styles.listItemLabel}>
-            密码:
+          <div className={styles.listItem}>
+            <div className={styles.listItemLabel}>
+              密码:
+            </div>
+            <Input
+              placeholder="请输入密码"
+              onChange={(e: any) => formChange("password", e.target.value)}
+            />
           </div>
-          <Input
-            placeholder="请输入密码"
-            onChange={(e: any) => formChange("password", e.target.value)}
-          />
-        </div>
-        <div className={styles.listItem}>
-          <div className={styles.listItemLabel}>
-            确认密码:
+          <div className={styles.listItem}>
+            <div className={styles.listItemLabel}>
+              确认密码:
+            </div>
+            <Input
+              placeholder="请重复输入密码"
+              onChange={(first: any) => console.log(first)}
+            />
           </div>
-          <Input
-            placeholder="请重复输入密码"
-            onChange={(first: any) => console.log(first)}
-          />
-        </div>
+        </form>
       </div>
     </div>
     <Button text="注册" onClick={() => addAccount()} />
