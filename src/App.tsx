@@ -10,9 +10,9 @@ type AppProps = {
 };
 
 const App: React.FC<AppProps> = ({ global }) => {
-  const { theme } = global;
+  // const { theme } = global;
   return (
-    <Theme theme={theme === "bright" ? "bright" : "dark"}>
+    <Theme theme={"bright"}>
       <>
         {/* <Navigation /> */}
         {renderRoutes(routes as RouteConfig[])}
