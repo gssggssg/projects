@@ -3,23 +3,31 @@
   width: 100%;
   padding: 1rem;
   .gssg-inp{
-    width: 100%;
-    min-width: 10rem;
-    font-size: 1.4rem;
-    line-height: 1;
-    border: 0;
-    outline: 0;
-    border-radius: var(--gssg-border-radius);
-    padding: 1.2rem;
-    // margin: 1rem;
-    background: transparent;
-    color: var(--gssg-color);
-    // text-shadow: 1px 1px 2px var(--gssg-color);
-    box-shadow: var(--gssg-shadow-inset);
-    // box-shadow: inset 2px 2px 5px  var(--gssg-bgcolor), inset -0.2rem -5px 10px var(--gssg-color);
-    box-sizing: border-box;
-    appearance: none;
-    -webkit-appearance: none;
+    &{
+      width: 100%;
+      min-width: 10rem;
+      font-size: 1.4rem;
+      line-height: 1;
+      border: 0;
+      outline: 0;
+      border-radius: var(--gssg-border-radius);
+      padding: 1.2rem;
+      // margin: 1rem;
+      background: transparent;
+      color: var(--gssg-color);
+      box-shadow:  var(--gssg-shadow-inset);
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    &:hover{
+      box-shadow: inset 0.2rem 0.2rem 0.4rem var(--gssg-bgcolor-1), inset -0.2rem -0.2rem 0.4rem  var(--gssg-bgcolor-1);
+    }
+
+    &:focus{
+      box-shadow: inset 0.2rem 0.2rem 0.8rem var(--gssg-bgcolor-2), inset -0.2rem -0.2rem 0.6rem var(--gssg-bgcolor-2);
+    }
   }
 
   input,input:focus,textarea,textarea:focus{
