@@ -7,12 +7,14 @@ CSS Modules
 1. 下载依赖
 ```
 npm i
+&
+yarn
 ```
 2. 运行实例
 ```
-npm start
+npm run start
 ```
 3. 打包，生产
 ```
-npm build
+npm run build
 ```
