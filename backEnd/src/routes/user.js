@@ -1,29 +1,12 @@
 const express = require('express');
 // 模块化
 const router = express.Router()
+// 
+const userController = require('../controller/user');
 
-router.get('/', (req, res) => {
-    res.json({
-        status: 200,
-        massage: "success",
-        data: {
-            code: 1,
-            massage: "请求数据成功！！！",
-            data: {}
-        }
-    })
-});
-
-router.post('/', (req, res) => {
-    res.json({
-        status: 200,
-        massage: "success",
-        data: {
-            code: 1,
-            massage: "请求数据成功！！！",
-            data: {}
-        }
-    })
-});
+// 获取用户信息
+router.get('/get', userController.getUser);
+// 添加用户
+router.post('/add', userController.addUser);
 
 module.exports = router;
