@@ -1,14 +1,14 @@
-const express = require('express')
-require('dotenv')
+// 导入.env 配置文件
+require('dotenv').config({ path: '.env' })
 
-const app = express()
+const initDB = require('./src/init/initDB')
+const initServer = require('./src/init/initServer')
 
-const PORT = process.env.PORT || 8080
+const main = async () => {
+  // 连接数据库
+  await initDB();
+  // 启动 node 代码
+  await initServer();
+}
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-})
-
-app.listen(PORT, () => {
-  console.log(`服务器启用成功 运行在 http://127.0.0.1:${PORT}`);
-})
+main();
