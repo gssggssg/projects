@@ -10,13 +10,17 @@ node express
 |     |- [db] # 数据库
 |     |- [exceptions] # 异常类
 |     |- [init] # 初始化
-|     |     |- [initDB] # 初始化数据库操作
-|     |     |- [initRoutes] # 初始化路由
-|     |     |- [initServer] # 初始化服务端
+|     |     |- initDB # 初始化数据库操作
+|     |     |- initRoutes # 初始化路由
+|     |     |- initServer # 初始化服务端
 |     |- [middleware] # 中间件
 |     |- [models] # models
 |     |- [routes] # 路由
-|- [.env] # 配置文件
+|     |- [utils] # 工具
+|     |     |- [validata] # 数据验证
+|     |     |- encrypt # 加密与解密
+|     |     |- jsonwebtoken # token 处理
+|- .env # 配置文件
 |- .gitignore # git提交隐藏文件
 |- app # 入口主文件
 |- [node_modules]
