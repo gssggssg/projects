@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken');
 // jwt 生成token
 const sign = (userInfo) => {
     return new Promise((resolve, reject) => {
-        jwt.sign(userInfo, process.env.JWT_SECRET, (error, token) => {
+        const { userName, email } = userInfo
+        jwt.sign({ userName, email }, process.env.JWT_SECRET, (error, token) => {
             if (error) reject(error)
             resolve(token)
         })
