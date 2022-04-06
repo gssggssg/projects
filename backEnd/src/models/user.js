@@ -8,7 +8,7 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING, // 数据类型
         allowNull: false, // 是否允许为 null
         primaryKey: true, // 是否为主键
-        unique: true, // 是否可以重复
+        unique: 'userName', // 是否可以重复
     },
     passWord: { // 密码
         type: DataTypes.STRING,
