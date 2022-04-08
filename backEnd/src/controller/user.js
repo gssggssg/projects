@@ -18,13 +18,24 @@ module.exports.addUser = async (req, res, next) => {
         const md5PWD = await md5Password(passWord)
         const newUser = await User.create({ userName, passWord: md5PWD, email })
         if (newUser) {
-            res.json({
-                status: 200,
+            const ReturnData = {
+                userName: newUser.dataValues.userName,
+                email: newUser.dataValues.email,
+                token: await sign({ userName, email }),
+                bio: null,
+                avatar: null,
+            }
+            res.status(200).json({
+                status: 220,
                 massage: "success",
-                data: newUser?.dataValues,
+                data: {
+                    code: 1,
+                    massage: "创建用户成功！",
+                    data: ReturnData
+                }
             })
         }
-    } catch (error) { next(error) }
+    } catch (error) { next(error) } // 整体异常捕获
 }
 
 // 用户登录
