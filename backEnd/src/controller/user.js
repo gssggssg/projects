@@ -1,11 +1,12 @@
-const { getUserValidata, loginUserValidata, addUserValidata } = require('../utils/validata/user.validata');
+const { loginUserValidata, addUserValidata } = require('../utils/validata/user.validata');
 const HttpEexceptions = require('../exceptions/http.exception');
 const User = require('../models/user');
 const { md5Password, verifyPassword } = require('../utils/encrypt');
-const { sign, verifyToken } = require('../utils/jsonwebtoken');
+const { sign } = require('../utils/jsonwebtoken');
+
 /**
  * 用户信息操作控制器
- */
+*/
 
 // 添加用户
 module.exports.addUser = async (req, res, next) => {
@@ -18,20 +19,18 @@ module.exports.addUser = async (req, res, next) => {
         const md5PWD = await md5Password(passWord)
         const newUser = await User.create({ userName, passWord: md5PWD, email })
         if (newUser) {
-            const ReturnData = {
+            delete newUser.dataValues.passWord
+            newUser.dataValues.token = await sign({
                 userName: newUser.dataValues.userName,
-                email: newUser.dataValues.email,
-                token: await sign({ userName, email }),
-                bio: null,
-                avatar: null,
-            }
+                email: newUser.dataValues.email
+            })
             res.status(200).json({
                 status: 200,
                 massage: "success",
                 data: {
                     code: 1,
                     massage: "创建用户成功！",
-                    data: ReturnData
+                    data: newUser
                 }
             })
         }
@@ -65,15 +64,25 @@ module.exports.loginUser = async (req, res, next) => {
     } catch (error) { next(error) } // 整体异常捕获
 }
 
-// 获取用户
-module.exports.getUser = async (req, res) => {
-    res.json({
-        status: 200,
-        massage: "success",
-        data: {
-            code: 1,
-            massage: "获取用户成功！！！",
-            data: {}
-        }
-    })
+// 获取用户信息
+module.exports.getUser = async (req, res, next) => {
+    try {
+        const { userName } = req.user
+        const user = await User.findByPk(userName); // 验证用户是否存在
+        if (!user) throw new HttpEexceptions(401, '用户不存在！', '请更换用户名重试！')
+        delete user.dataValues.passWord
+        user.dataValues.token = await sign({
+            userName: user.dataValues.userName,
+            email: user.dataValues.email
+        })
+        res.status(200).json({
+            status: 200,
+            massage: "success",
+            data: {
+                code: 1,
+                massage: "请求成功",
+                data: user
+            }
+        })
+    } catch (error) { next(error) } // 整体异常捕获
 }
