@@ -8,10 +8,10 @@ const LoginForm: React.FC = () => {
     console.log('Received values of form: ', values);
   };
   return (
-    <div className={styles.LoginForm}>
+    <div>
+      <div className={styles.formTitle}>登录</div>
       <Form
         name="normal_login"
-        className="login-form"
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
@@ -20,7 +20,7 @@ const LoginForm: React.FC = () => {
           rules={[{ required: true, message: '请输入用户名！' }]}
         >
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
+            prefix={<UserOutlined />}
             placeholder="用户名"
           />
         </Form.Item>
@@ -29,15 +29,15 @@ const LoginForm: React.FC = () => {
           rules={[{ required: true, message: '请输入密码！' }]}
         >
           <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
+            prefix={<LockOutlined />}
             type="password"
             placeholder="密码"
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" block>
             登录
-          </Button>Or <a href="">现在登录</a>
+          </Button>
         </Form.Item>
       </Form>
     </div>
