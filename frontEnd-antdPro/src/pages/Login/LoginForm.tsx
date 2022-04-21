@@ -2,11 +2,17 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
+import { connect } from 'umi';
 
-const LoginForm: React.FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+const LoginForm: React.FC = (props: any) => {
+  console.log(props);
+  const onFinish = (values: Object) => {
+    props.dispatch({
+      type: "login/login",
+      payload: values,
+    })
   };
+
   return (
     <div>
       <div className={styles.formTitle}>登录</div>
@@ -16,7 +22,7 @@ const LoginForm: React.FC = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="userName"
           rules={[{ required: true, message: '请输入用户名！' }]}
         >
           <Input
@@ -25,7 +31,7 @@ const LoginForm: React.FC = () => {
           />
         </Form.Item>
         <Form.Item
-          name="password"
+          name="passWord"
           rules={[{ required: true, message: '请输入密码！' }]}
         >
           <Input
@@ -44,4 +50,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default connect(({ login }: any) => login)(LoginForm)
