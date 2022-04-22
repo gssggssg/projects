@@ -5,14 +5,12 @@ import styles from './index.module.less';
 import { connect } from 'umi';
 
 const LoginForm: React.FC = (props: any) => {
-  console.log(props);
-  const onFinish = (values: Object) => {
+  const onFinish = async (values: Object) => {
     props.dispatch({
       type: "login/login",
       payload: values,
     })
   };
-
   return (
     <div>
       <div className={styles.formTitle}>登录</div>

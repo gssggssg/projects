@@ -1,7 +1,5 @@
-import { stringify } from 'querystring';
 import { history } from 'umi';
 import { login } from '@/services/login';
-
 export interface ResponseGenerator {
     config?: any,
     data?: any,
@@ -20,7 +18,7 @@ const Model = {
     namespace: 'login',
     state: {
         access_token: null,
-        user_info: null
+        user_info: null,
     },
     effects: {
         *login({ payload }: any, { call, put }: any) {
@@ -29,18 +27,15 @@ const Model = {
                 yield put({
                     type: 'login/update',
                     payload: { access_token: data.data.token },
-                })
+                });
+                history.push('/');
             }
         },
 
     },
     reducers: {
         update(state: any, action: any) {
-            console.log(state, action)
-            return {
-                ...state,
-                ...action,
-            }
+            return { ...state, ...action }
         },
     }
 };
