@@ -6,7 +6,21 @@
       {
         name: 'login',
         path: '/login',
-        component: './login',
+        component: './user/login',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/signUp',
+    layout: false,
+    routes: [
+      {
+        name: 'signUp',
+        path: '/signUp',
+        component: './user/SignUp',
       },
       {
         component: './404',
