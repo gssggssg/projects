@@ -1,19 +1,19 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 import { connect } from 'umi';
 
 const LoginForm: React.FC = (props: any) => {
   const onFinish = async (values: Object) => {
     props.dispatch({
-      type: "user/login",
+      type: "user/signUp",
       payload: values,
     })
   };
   return (
     <div>
-      <div className={styles.formTitle}>登录</div>
+      <div className={styles.formTitle}>注册</div>
       <Form
         name="normal_login"
         initialValues={{ remember: true }}
@@ -38,9 +38,18 @@ const LoginForm: React.FC = (props: any) => {
             placeholder="密码"
           />
         </Form.Item>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: '请输入邮箱！' }]}
+        >
+          <Input
+            prefix={<MailOutlined />}
+            placeholder="邮箱"
+          />
+        </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" block>
-            登录
+            注册
           </Button>
         </Form.Item>
       </Form>

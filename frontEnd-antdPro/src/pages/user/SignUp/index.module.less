@@ -1,0 +1,60 @@
+.loginbg {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  // background: transparent url("../../../images/loginBg.jpg") center center no-repeat;
+  backdrop-filter: blur(2rem);
+  position: relative;
+  z-index: 9;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    // background: transparent url('../../images/loginBg.jpg') center center no-repeat;
+    filter: blur(1rem);
+    z-index: -1;
+    background-size: cover;
+  }
+
+  .container {
+    max-width: 120rem;
+    min-width: 80rem;
+    width: 100rem;
+    height: calc(100% - 20rem);
+    max-height: 100vh;
+    min-height: 30rem;
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 1.2rem 0.1rem #1780b53c;
+    align-items: center;
+    // background: url('../../../images/loginBg.jpg') center center no-repeat;
+
+    .loginForm {
+      max-width: 40rem;
+      min-width: 20rem;
+      width: 30rem;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      border-radius: 0.8rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(1rem);
+      align-items: center;
+
+      .formTitle {
+        font-size: 2rem;
+        font-weight: bold;
+        line-height: 6rem;
+        text-align: center;
+        letter-spacing: 1rem;
+      }
+    }
+  }
+}
