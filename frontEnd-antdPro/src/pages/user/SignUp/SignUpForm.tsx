@@ -4,7 +4,7 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 import { connect } from 'umi';
 
-const LoginForm: React.FC = (props: any) => {
+const SignUpForm: React.FC = (props: any) => {
   const onFinish = async (values: Object) => {
     props.dispatch({
       type: "user/signUp",
@@ -57,4 +57,4 @@ const LoginForm: React.FC = (props: any) => {
   );
 };
 
-export default connect(({ login }: any) => login)(LoginForm)
+export default connect(({ login }: any) => login)(SignUpForm)
