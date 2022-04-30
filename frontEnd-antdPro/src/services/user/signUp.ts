@@ -12,4 +12,4 @@ export async function signUp(body: any, options?: { [key: string]: any }) {
         data: body,
         ...(options || {}),
     });
-}
+};
