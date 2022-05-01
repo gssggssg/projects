@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-// 登录注册
+// 用户登录
 export async function login(body: any, options?: { [key: string]: any }) {
     return request('/api/user/login', {
         method: 'POST',
