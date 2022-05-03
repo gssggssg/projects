@@ -1,6 +1,6 @@
 // import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 // import { SettingDrawer } from '@ant-design/pro-layout';
-import { PageLoading } from '@ant-design/pro-layout';
+// import { PageLoading } from '@ant-design/pro-layout';
 // import type { RunTimeLayoutConfig } from 'umi';
 // import { history, Link } from 'umi';
 // import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
