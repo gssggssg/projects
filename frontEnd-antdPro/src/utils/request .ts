@@ -1,5 +1,8 @@
 import { extend } from 'umi-request';
 
+const aaa = sessionStorage.getItem('token')
+console.log(aaa)
+
 const request = extend({
     // prefix: 'http://gssg.top:8080',
     //   suffix: ".json",
