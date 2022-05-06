@@ -28,6 +28,21 @@
     ],
   },
   {
+    path: '/',
+    layout: false,
+    component: './Home',
+    routes: [
+      {
+        name: 'home',
+        path: '/home',
+        component: './Home',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
     component: './404',
   },
 ];
