@@ -2,7 +2,6 @@ import { history } from 'umi';
 import userApi from '@/services/user';
 import { message } from 'antd';
 
-
 export interface ResponseGenerator {
     config?: any,
     data?: any,
@@ -34,8 +33,9 @@ const Model = {
                 });
                 message.success('登录成功');
                 history.push('/');
+                sessionStorage.setItem('token', data?.data?.token)
             }
-            data.data.code !== 1 &&  message.success('登录失败');
+            data.data.code !== 1 && message.success('登录失败');
         },
         // 注册
         *signUp({ payload }: any, { call, put }: any) {
@@ -47,7 +47,7 @@ const Model = {
                 });
                 message.success('注册成功');
             }
-            data.data.code !== 1 &&  message.success('注册失败');
+            data.data.code !== 1 && message.success('注册失败');
         },
         // 获取用户
         *getUser({ payload }: any, { call, put }: any) {

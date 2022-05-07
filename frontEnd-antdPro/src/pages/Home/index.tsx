@@ -12,6 +12,7 @@ const Hoem: React.FC = (props: any) => {
 
   return (
     <div>
+      这是主页
       <Button type="primary" onClick={() => getUser()} block>
         获取用户信息
       </Button>
