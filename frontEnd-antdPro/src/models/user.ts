@@ -28,12 +28,12 @@ const Model = {
             const data: ResponseGenerator = yield call(userApi.login.login, { user: { ...payload } });
             if (data.data.code === 1 && data.data.data) {
                 yield put({
-                    type: 'user/update',
+                    type: 'update',
                     payload: { access_token: data.data.token },
                 });
                 message.success('登录成功');
                 history.push('/');
-                sessionStorage.setItem('token', data?.data?.token)
+                sessionStorage.setItem('token', data?.data?.data?.token)
             }
             data.data.code !== 1 && message.success('登录失败');
         },
@@ -42,7 +42,7 @@ const Model = {
             const data: ResponseGenerator = yield call(userApi.signUp.signUp, { user: { ...payload } });
             if (data.data.code === 1 && data.data.data) {
                 yield put({
-                    type: 'user/update',
+                    type: 'update',
                     payload: { access_token: data.data.token },
                 });
                 message.success('注册成功');
@@ -54,7 +54,7 @@ const Model = {
             const data: ResponseGenerator = yield call(userApi.api.getUser, { user: { ...payload } });
             if (data.data.code === 1 && data.data.data) {
                 yield put({
-                    type: 'user/update',
+                    type: 'update',
                     payload: {
                         access_token: data.data.token
                     },
