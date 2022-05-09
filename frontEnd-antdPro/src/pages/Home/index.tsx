@@ -1,21 +1,32 @@
 import React from 'react';
 import { connect } from 'umi';
-import { Button } from 'antd';
+import { Card, Button, Descriptions } from 'antd';
+import styles from "./index.module.less";
 
 const Hoem: React.FC = (props: any) => {
-
   const getUser = async () => {
     props.dispatch({
       type: "user/getUser",
     })
   };
-
+  const { user } = props;
+  console.log();
   return (
-    <div>
-      这是主页
-      <Button type="primary" onClick={() => getUser()} block>
-        获取用户信息
-      </Button>
+    <div className={styles.home}>
+      <Card bordered={false} style={{ width: 600, margin: 'auto' }}>
+        {
+          Object.keys(user?.user).length ?
+            <Descriptions title="用户信息">
+              <Descriptions.Item label="姓名" span={3}>{user?.user?.userName}</Descriptions.Item>
+              <Descriptions.Item label="邮箱" span={3}>{user?.user?.email}</Descriptions.Item>
+              <Descriptions.Item label="创建时间" span={3}>{user?.user?.createdAt}</Descriptions.Item>
+              <Descriptions.Item label="更新时间" span={3}>{user?.user?.updatedAt}</Descriptions.Item>
+            </Descriptions>
+            : <Button type="primary" onClick={() => getUser()} block>
+              获取用户信息
+            </Button>
+        }
+      </Card>
     </div>
   );
 };
