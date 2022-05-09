@@ -31,7 +31,8 @@ const Model = {
                 yield put({
                     type: 'update',
                     payload: {
-                        access_token: data.data.token
+                        access_token: data.data.token,
+                        user: data.data.data,
                     },
                 });
                 message.success('登录成功');
@@ -59,8 +60,7 @@ const Model = {
                 yield put({
                     type: 'update',
                     payload: {
-                        access_token: data.data.token,
-                        user: data.data
+                        user: data.data.data,
                     },
                 });
                 history.push('/');
@@ -69,8 +69,8 @@ const Model = {
         },
     },
     reducers: {
-        update(state: any, action: any) {
-            return { ...state, ...action }
+        update(state: any, { payload }: any) {
+            return { ...state, ...payload }
         },
     }
 };
