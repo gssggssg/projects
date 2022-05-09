@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { connect, history } from 'umi';
 import styles from './index.module.less';
-import { connect } from 'umi';
 
 const LoginForm: React.FC = (props: any) => {
   const onFinish = async (values: Object) => {
@@ -39,9 +39,14 @@ const LoginForm: React.FC = (props: any) => {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" block>
-            登录
-          </Button>
+          <div className={styles.butGroup}>
+            <Button type="primary" htmlType="submit" >
+              登录
+            </Button>
+            <Button onClick={() => history.push('/signUp')}>
+              注册
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>
