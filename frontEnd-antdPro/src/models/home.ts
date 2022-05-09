@@ -2,7 +2,6 @@ import { history } from 'umi';
 import userApi from '@/services/user';
 import { message } from 'antd';
 
-
 export interface ResponseGenerator {
     config?: any,
     data?: any,

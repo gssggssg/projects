@@ -21,6 +21,7 @@ const Model = {
     state: {
         access_token: null,
         user_info: null,
+        user: {}
     },
     effects: {
         // 登录
@@ -29,7 +30,9 @@ const Model = {
             if (data.data.code === 1 && data.data.data) {
                 yield put({
                     type: 'update',
-                    payload: { access_token: data.data.token },
+                    payload: {
+                        access_token: data.data.token
+                    },
                 });
                 message.success('登录成功');
                 history.push('/');
@@ -56,11 +59,13 @@ const Model = {
                 yield put({
                     type: 'update',
                     payload: {
-                        access_token: data.data.token
+                        access_token: data.data.token,
+                        user: data.data
                     },
                 });
                 history.push('/');
             }
+            data.data.code !== 1 && message.success('注册失败');
         },
     },
     reducers: {
