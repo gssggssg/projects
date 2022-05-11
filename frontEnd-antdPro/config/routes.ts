@@ -29,7 +29,6 @@
   },
   {
     path: '/',
-    layout: false,
     component: './Home',
     routes: [
       {
