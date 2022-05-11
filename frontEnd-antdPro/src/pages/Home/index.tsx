@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'umi';
+import { connect, history } from 'umi';
 import { Card, Button, Descriptions } from 'antd';
 import styles from "./index.module.less";
 
@@ -27,6 +27,11 @@ const Hoem: React.FC = (props: any) => {
             </Button>
         }
       </Card>
+      <div className={styles.butGroup}>
+        <Button type="primary" onClick={() => history.push('/login')} block>登录</Button>
+        <Button type="primary" onClick={() => history.push('/signUp')} block>注册</Button>
+      </div>
+
     </div>
   );
 };
