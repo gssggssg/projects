@@ -10,7 +10,6 @@ const Hoem: React.FC = (props: any) => {
     })
   };
   const { user } = props;
-  console.log();
   return (
     <div className={styles.home}>
       <Card bordered={false} style={{ width: 600, margin: 'auto' }}>
@@ -31,7 +30,6 @@ const Hoem: React.FC = (props: any) => {
         <Button type="primary" onClick={() => history.push('/login')} block>登录</Button>
         <Button type="primary" onClick={() => history.push('/signUp')} block>注册</Button>
       </div>
-
     </div>
   );
 };
