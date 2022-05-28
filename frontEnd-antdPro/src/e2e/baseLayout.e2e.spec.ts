@@ -37,9 +37,3 @@ const testPage = (path: string, page: Page) => async () => {
 };
 
 const routers = formatter(RouterConfig);
-
-routers.forEach((route) => {
-  test(`test route page ${route}`, async ({ page }) => {
-    await testPage(route, page);
-  });
-});
