@@ -3,7 +3,7 @@ import { connect, history } from 'umi';
 import { Card, Button, Descriptions } from 'antd';
 import styles from "./index.module.less";
 
-const Hoem: React.FC = (props: any) => {
+const Home: React.FC = (props: any) => {
   const getUser = async () => {
     props.dispatch({
       type: "user/getUser",
@@ -34,4 +34,4 @@ const Hoem: React.FC = (props: any) => {
   );
 };
 
-export default connect(({ home, user }: any) => { return { home, user } })(Hoem);
+export default connect(({ home, user }: any) => { return { home, user } })(Home);
