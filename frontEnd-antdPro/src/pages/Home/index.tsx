@@ -5,9 +5,7 @@ import styles from "./index.module.less";
 
 const Home: React.FC = (props: any) => {
   const getUser = async () => {
-    props.dispatch({
-      type: "user/getUser",
-    })
+    props.dispatch({ type: "user/getUser" })
   };
   const { user } = props;
   return (
@@ -26,10 +24,6 @@ const Home: React.FC = (props: any) => {
             </Button>
         }
       </Card>
-      <div className={styles.butGroup}>
-        <Button type="primary" onClick={() => history.push('/login')} block>登录</Button>
-        <Button type="primary" onClick={() => history.push('/signUp')} block>注册</Button>
-      </div>
     </div>
   );
 };
