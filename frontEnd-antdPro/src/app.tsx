@@ -15,6 +15,8 @@ export const initialStateConfig = {
     loading: <PageLoading />,
 };
 
+const token = sessionStorage.getItem('token')
+
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
