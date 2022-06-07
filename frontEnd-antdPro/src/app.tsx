@@ -53,8 +53,7 @@ export async function getInitialState(): Promise<{
 }
 
 // // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
-    console.log('initialState, setInitialState', initialState, setInitialState);
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: any) => {
     return {
         // rightContentRender: () => <RightContent />,
         disableContentMargin: false,
@@ -65,7 +64,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         onPageChange: () => {
             const { location } = history;
             // 如果没有登录，重定向到 login
-            if (!initialState?.currentUser && location.pathname !== loginPath) {
+            if (!initialState?.fetchUserInfo() && location.pathname !== loginPath) {
                 history.push(loginPath);
             }
         },
@@ -83,7 +82,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
                             disableUrlParams
                             enableDarkTheme
                             onSettingChange={(settings) => {
-                                setInitialState((preInitialState) => ({
+                                setInitialState((preInitialState: any) => ({
                                     ...preInitialState,
                                     settings,
                                 }));
