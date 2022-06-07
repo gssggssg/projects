@@ -28,18 +28,20 @@
     ],
   },
   {
+    path: '/home',
+    name: '首页',
+    icon: 'table',
+    component: './Home',
+  },
+  {
+    name: '五子棋',
+    icon: 'table',
+    path: '/gobang',
+    component: './Gobang',
+  },
+  {
     path: '/',
     component: './Home',
-    routes: [
-      {
-        name: 'home',
-        path: '/home',
-        component: './Home',
-      },
-      {
-        component: './404',
-      },
-    ],
   },
   {
     component: './404',
