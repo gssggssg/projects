@@ -15,8 +15,6 @@ export const initialStateConfig = {
     loading: <PageLoading />,
 };
 
-const token = sessionStorage.getItem('token')
-
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
@@ -25,11 +23,9 @@ export async function getInitialState(): Promise<{
     loading?: boolean;
     fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
-    let loading = false
     const fetchUserInfo = async () => {
         try {
             const msg = await queryCurrentUser();
-            loading = true
             return msg.data;
         } catch (error) {
             history.push(loginPath);
@@ -42,18 +38,18 @@ export async function getInitialState(): Promise<{
         const currentUser = await fetchUserInfo();
         return {
             fetchUserInfo,
-            loading,
             currentUser,
         };
     }
+    const currentUser = await fetchUserInfo();
     return {
-        loading,
+        currentUser,
         fetchUserInfo,
     };
 }
 
 // // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: any) => {
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
     return {
         // rightContentRender: () => <RightContent />,
         disableContentMargin: false,
@@ -64,7 +60,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
         onPageChange: () => {
             const { location } = history;
             // 如果没有登录，重定向到 login
-            if (!initialState?.fetchUserInfo() && location.pathname !== loginPath) {
+            if (!initialState?.currentUser && location.pathname !== loginPath) {
                 history.push(loginPath);
             }
         },
