@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, history } from 'umi';
+import { connect } from 'umi';
 import { Card, Button, Descriptions } from 'antd';
 import styles from "./index.module.less";
 
