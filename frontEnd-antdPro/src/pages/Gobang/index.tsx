@@ -6,7 +6,12 @@ const Gobang: React.FC = () => {
   return (
     <div className={styles.home}>
       <Card>
-        这里是五子棋页面
+        <div>
+          五子棋
+        </div>
+        <div>
+          棋盘
+        </div>
       </Card>
     </div>
   );
