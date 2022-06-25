@@ -1,17 +1,13 @@
 import React from 'react';
 import { Card } from 'antd';
+import Board from './Board'
 import styles from "./index.module.less";
 
 const Gobang: React.FC = () => {
   return (
-    <div className={styles.home}>
+    <div className={styles.gobang}>
       <Card>
-        <div>
-          五子棋
-        </div>
-        <div>
-          棋盘
-        </div>
+        <Board />
       </Card>
     </div>
   );
