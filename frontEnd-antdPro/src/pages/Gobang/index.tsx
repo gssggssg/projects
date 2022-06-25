@@ -6,9 +6,7 @@ import styles from "./index.module.less";
 const Gobang: React.FC = () => {
   return (
     <div className={styles.gobang}>
-      <Card>
-        <Board />
-      </Card>
+      <Board />
     </div>
   );
 };
