@@ -9,12 +9,12 @@ export const boardLength = (): number[] => {
 }
 
 // 生成棋盘数组方法
-export const piecesArr = (): number[][][] => {
+export const piecesArr = ():string[][] => {
     let result = [];
     for (let row = 0; row < 15; row++) {
         let rowArr = []
         for (let col = 0; col < 15; col++) {
-            rowArr.push([row, col]);
+            rowArr.push([row, col].join());
         }
         result.push(rowArr);
 

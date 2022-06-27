@@ -21,6 +21,7 @@
     box-shadow: 0.4rem 0.4rem 1rem 0.2rem #134857;
     border-radius: 1.2rem;
     z-index: 0;
+    margin: 10%;
 
     // 棋盘线
     .boardBox {
@@ -31,7 +32,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        padding: 8%;
+        padding: 4%;
 
         .boardCol {
             display: flex;
@@ -63,12 +64,12 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: calc(-100% / 18 / 2);
-    left: calc(-100% / 18 / 2);
-    padding: 8%;
+    top: calc(-100% / 15 / 2);
+    left: calc(-100% / 15 / 2);
+    padding: 4%;
     z-index: 1;
     aspect-ratio: 1;
-    width: calc(100% + 100% / 18);
+    width: calc(100% + 100% / 15);
 
     .piecesCol {
         display: flex;
@@ -76,18 +77,36 @@
         .piecesItem {
             flex: 1;
             aspect-ratio: 1; // 长款比例
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff;
-            box-shadow: 0.3rem 0.3rem 0.4rem 0.1rem rgb(2 71 108);
             overflow: hidden;
-            margin: 0.6%;
+            padding: 1rem;
 
-            &:hover {
-                cursor: pointer;
+            span {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                width: 100%;
+                aspect-ratio: 1;
+                border-radius: 50%;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
+
+            // 黑棋子
+            .black {
+                background-color: #000;
+                box-shadow: 0.3rem 0.3rem 0.4rem 0.1rem rgb(2 71 108);
+            }
+
+            // 白棋子
+            .white {
+                background-color: #fff;
+                box-shadow: 0.3rem 0.3rem 0.4rem 0.1rem rgb(2 71 108);
+            }
+
+
         }
     }
 
