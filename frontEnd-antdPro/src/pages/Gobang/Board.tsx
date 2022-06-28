@@ -3,7 +3,7 @@ import { connect } from 'umi';
 import { boardLength, piecesArr } from './drawing'
 import styles from "./index.module.less";
 
-const Gobang: React.FC = (props: any) => {
+const Board: React.FC = (props: any) => {
 
   const { whitePieces, blackPieces, nextChessPiece } = props.gobang;
 
@@ -79,4 +79,4 @@ const Gobang: React.FC = (props: any) => {
 };
 
 // export default Gobang;
-export default connect(({ gobang }: any) => ({ gobang }))(Gobang);
+export default connect(({ gobang }: any) => ({ gobang }))(Board);
