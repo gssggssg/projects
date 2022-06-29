@@ -9,6 +9,7 @@ const Footer: React.FC = () => {
         {
           title: '赣ICP备2022001749号',
           href: 'https://beian.miit.gov.cn/',
+          key: 'gssg'
         },
       ]}
     />
