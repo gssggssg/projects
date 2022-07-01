@@ -1,22 +1,30 @@
 // 五子棋页面的样式
 .gobang {
     margin: auto;
-    width: 100%;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
     flex-wrap: nowrap;
 
-    .gobangBoard{
-        width: 100%;
+    .gobangBoard {
+        width: calc(100% - 20rem);
         overflow: hidden;
+        padding: 4%;
     }
-    .gobangPanel{
+
+    .gobangPanel {
         width: 20rem;
-        position: static;
+        max-width: 20%;
+        min-width: 10%;
         height: 100%;
-        background-color: #666;
+        position: fixed;
+        overflow: auto;
+        overflow-x: hidden;
+        top: 0;
+        right: 0;
+        margin: auto;
+        padding-top: 48px;
+        background-color: #93b5cf;
     }
 }
 
@@ -32,7 +40,7 @@
     box-shadow: 0.4rem 0.4rem 1rem 0.2rem #134857;
     border-radius: 1.2rem;
     z-index: 0;
-    margin: 10%;
+    margin: 10% auto;
 
     // 棋盘线
     .boardBox {
@@ -123,6 +131,4 @@
 
 }
 
-.panelBox{
-
-}
+.panelBox {}
