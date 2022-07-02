@@ -12,16 +12,21 @@ const Panel: React.FC = (props: any) => {
     black: "黑色",
   }
 
+  console.log(nextChessPiece);
+
   return (
     <div className={styles.panelBox}>
       <div className={styles.roundTip}>
-        <span>
-          {colorPiece[nextChessPiece]}
-        </span>
-        <span></span>
-
+        <div>
+          <h3 className={styles.chessTitle}>
+            轮到{colorPiece[nextChessPiece]}棋子
+          </h3>
+          <div className={styles.chessModel}>
+            <span className={styles[nextChessPiece]}>
+            </span>
+          </div>
+        </div>
       </div>
-
     </div>
   );
 };
