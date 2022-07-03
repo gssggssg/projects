@@ -62,7 +62,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
             // 如果没有登录，重定向到 login
             if (!initialState?.currentUser &&
                 location.pathname !== loginPath &&
-                location.pathname === '/signUp') {
+                location.pathname !== '/signUp') {
                 history.push(loginPath);
             }
         },
