@@ -12,8 +12,6 @@ const Panel: React.FC = (props: any) => {
     black: "黑色",
   }
 
-  console.log(nextChessPiece);
-
   return (
     <div className={styles.panelBox}>
       <div className={styles.roundTip}>

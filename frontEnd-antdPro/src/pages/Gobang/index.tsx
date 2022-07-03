@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from 'antd';
 import Board from './Board'
 import Panel from './Panel'
 import styles from "./index.module.less";

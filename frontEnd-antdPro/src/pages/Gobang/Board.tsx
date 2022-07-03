@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'umi';
 import { boardLength, piecesArr } from './drawing'
-import styles from "./index.module.less";
+import { getGameRule, judgeSuccess } from './rules';
+import styles from './index.module.less';
 
 const Board: React.FC = (props: any) => {
 
   const { whitePieces, blackPieces, nextChessPiece } = props.gobang;
+
+  // 初始化棋盘
+  useEffect(
+    () => {
+      getGameRule()
+    }, []
+  )
+
+  // 每次下棋，触发检查函数
+  useEffect(
+    () => { judgeSuccess(whitePieces, blackPieces) }, [whitePieces, blackPieces]
+  )
 
   //  下棋触发函数
   const playChess = (coordinate: string) => {
