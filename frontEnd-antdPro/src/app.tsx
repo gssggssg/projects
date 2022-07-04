@@ -92,3 +92,13 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         },
     };
 };
+
+// 解决控制台输出 http 报错
+export const dva = {
+    config: {
+        onError(e: any) {
+            e.preventDefault();
+            console.error(e.message);
+        },
+    },
+};
