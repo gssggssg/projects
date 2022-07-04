@@ -53,4 +53,4 @@ const LoginForm: React.FC = (props: any) => {
   );
 };
 
-export default connect(({ login }: any) => login)(LoginForm)
+export default connect(({ login }: any) => { return { login } })(LoginForm)
