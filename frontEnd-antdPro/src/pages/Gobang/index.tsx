@@ -31,8 +31,7 @@ const Gobang: React.FC = (props: any) => {
             </Descriptions>
           </div>
           <div className={styles.popupFoot}>
-            <Button>查看</Button>
-            <Button>重开</Button>
+            <Button onClick={() => props.dispatch({ type: "gobang/restart" })}>重开</Button>
           </div>
         </div>
       </Modal>
