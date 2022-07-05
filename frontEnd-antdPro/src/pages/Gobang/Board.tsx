@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'umi';
 import { boardLength, piecesArr } from './drawing'
 import { getGameRule, judgeSuccess } from './rules';
@@ -6,7 +6,10 @@ import styles from './index.module.less';
 
 const Board: React.FC = (props: any) => {
 
-  const { whitePieces, blackPieces, nextChessPiece } = props.gobang;
+  const { whitePieces, blackPieces, nextChessPiece, isStart, VictoryInfo: { isVictory } } = props.gobang;
+
+  // 当前棋子
+  const [currentPieces, setCurrentPieces] = useState('')
 
   // 初始化棋盘
   useEffect(
@@ -17,11 +20,26 @@ const Board: React.FC = (props: any) => {
 
   // 每次下棋，触发检查函数
   useEffect(
-    () => { judgeSuccess(whitePieces, blackPieces) }, [whitePieces, blackPieces]
+    () => {
+      const result = judgeSuccess(whitePieces, blackPieces, currentPieces)
+      if (result.isVictory) {
+        update({ VictoryInfo: result })
+      }
+    }, [whitePieces, blackPieces, currentPieces]
   )
+
+  const update = (payload: Object) => {
+    props.dispatch({
+      type: "gobang/update",
+      payload,
+    })
+  }
 
   //  下棋触发函数
   const playChess = (coordinate: string) => {
+    if (isVictory || isStart) {
+      return
+    }
     let chessPieces: {
       piece: string;
       data: string[];
@@ -40,13 +58,12 @@ const Board: React.FC = (props: any) => {
     chessPieces['data'].push(coordinate)
     // 去重
     const newPieces = Array.from(new Set(chessPieces.data))
-    props.dispatch({
-      type: "gobang/update",
-      payload: {
-        [chessPieces['piece']]: newPieces,
-        nextChessPiece: nextChessPiece === "white" ? "black" : 'white'
-      },
+    update({
+      [chessPieces['piece']]: newPieces,
+      nextChessPiece: nextChessPiece === "white" ? "black" : 'white'
     })
+    // 判断是否胜利函数
+    setCurrentPieces(coordinate)
   }
 
   return (

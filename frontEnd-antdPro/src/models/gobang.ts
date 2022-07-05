@@ -16,9 +16,14 @@ enum ColorPiece {
 const Model = {
     namespace: 'gobang',
     state: {
-        nextChessPiece: ColorPiece.black,
-        whitePieces: [],
-        blackPieces: [],
+        nextChessPiece: ColorPiece.black, // 下一个棋子颜色
+        whitePieces: [], // 白色棋子
+        blackPieces: [], // 黑色棋子
+        isStart: false, // 是否开始游戏
+        VictoryInfo: {
+            isVictory: false, // 是否游戏存在胜利
+            winner: '',  // 胜利方
+        },
     },
     effects: {
         // 登录
