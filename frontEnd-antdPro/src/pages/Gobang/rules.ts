@@ -48,37 +48,38 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
         isVictory: false,
         winner: ''
     }
-    // console.log(whitePieces, blackPieces, currentPieces)
+
     const ruleNum = getGameRule()
-    const row = currentPieces?.split(',')[0] // 第几行
-    const col = currentPieces?.split(',')[1] // 第几列
 
-    const direction = [
-        [0, 1], // 行
-        [1, 0], // 列
-        [+1, +1], // 撇
-        [-1, -1], // 捺
-    ]
-
-    // 使用二分法
-    direction.forEach(
+    const currentRuleNum = (party: string[]) => ruleNum.filter(
         (item) => {
-            for (let index = 0; index < 5; index++) {
-                if (!blackPieces.includes(`${+row + item[0] * index},${+col + item[1] * index}`)) {
+            return item.includes(currentPieces)
+        }
+    ).filter(
+        (item) => {
+            let result = true
+            for (let index = 0; index < item.length; index++) {
+                if (!party.includes(item[index])) {
+                    result = false
                     return false
                 }
             }
-            result.isVictory = true
-            result.winner = '黑色'
-            for (let index = 0; index < 5; index++) {
-                if (!whitePieces.includes(`${+row + item[0] * index},${+col + item[1] * index}`)) {
-                    return false
-                }
-            }
-            result.isVictory = true
-            result.winner = '白色'
-            return
+            return result
         }
     )
+    if (currentRuleNum(whitePieces).length) {
+        result = {
+            isVictory: !!currentRuleNum(whitePieces).length,
+            winner: '白色'
+        }
+    }
+
+    if (currentRuleNum(blackPieces).length) {
+        result = {
+            isVictory: !!currentRuleNum(blackPieces).length,
+            winner: '黑色'
+        }
+    }
+
     return result
 }
