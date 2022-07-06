@@ -18,8 +18,8 @@ export const getGameRule = () => {
             const direction = [
                 [0, 1], // 行
                 [1, 0], // 列
-                [+1, +1], // 撇
-                [-1, -1], // 捺
+                [+1, +1], // 捺
+                [+1, -1], // 撇
             ]
             const newInitValue = initValue
             direction.forEach(
@@ -67,6 +67,9 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
             return result
         }
     )
+
+    console.log('currentRuleNum====>', currentRuleNum(whitePieces))
+
     if (currentRuleNum(whitePieces).length) {
         result = {
             isVictory: !!currentRuleNum(whitePieces).length,

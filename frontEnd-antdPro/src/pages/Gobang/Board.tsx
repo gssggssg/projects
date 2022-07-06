@@ -62,7 +62,7 @@ const Board: React.FC = (props: any) => {
       [chessPieces['piece']]: newPieces,
       nextChessPiece: nextChessPiece === "white" ? "black" : 'white'
     })
-    // 判断是否胜利函数
+    // 设置当前棋子 当前棋子
     setCurrentPieces(coordinate)
   }
 
