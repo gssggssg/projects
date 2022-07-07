@@ -37,6 +37,7 @@ const Board: React.FC = (props: any) => {
   
   //  下棋触发函数
   const playChess = (coordinate: string) => {
+
     if (isVictory || isStart) {
       return
     }

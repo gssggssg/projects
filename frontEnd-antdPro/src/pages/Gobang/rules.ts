@@ -25,10 +25,10 @@ export const getGameRule = () => {
             direction.forEach(
                 (item) => {
                     let newArr: string[] = []
-                    if (+row + item[0] * 5 < 0 ||
-                        +row + item[0] * 5 > 14 ||
-                        +col + item[1] * 5 < 0 ||
-                        +col + item[1] * 5 > 14) {
+                    if (+row + item[0] * 4 < 0 ||
+                        +row + item[0] * 4 > 14 ||
+                        +col + item[1] * 4 < 0 ||
+                        +col + item[1] * 4 > 14) {
                         return
                     }
                     for (let index = 0; index < 5; index++) {
@@ -50,7 +50,7 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
     }
 
     const ruleNum = getGameRule()
-
+    
     const currentRuleNum = (party: string[]) => ruleNum.filter(
         (item) => {
             return item.includes(currentPieces)
@@ -68,7 +68,7 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
         }
     )
 
-    console.log('currentRuleNum====>', currentRuleNum(whitePieces))
+    // console.log('currentRuleNum====>', ruleNum,currentRuleNum(whitePieces))
 
     if (currentRuleNum(whitePieces).length) {
         result = {
