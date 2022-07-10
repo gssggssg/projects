@@ -109,5 +109,4 @@ const Board: React.FC = (props: any) => {
   );
 };
 
-// export default Gobang;
 export default connect(({ gobang }: any) => ({ gobang }))(Board);

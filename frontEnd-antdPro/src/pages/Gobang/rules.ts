@@ -68,8 +68,6 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
         }
     )
 
-    // console.log('currentRuleNum====>', ruleNum,currentRuleNum(whitePieces))
-
     if (currentRuleNum(whitePieces).length) {
         result = {
             isVictory: !!currentRuleNum(whitePieces).length,
