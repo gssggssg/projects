@@ -42,7 +42,7 @@ export const getGameRule = () => {
     )
 }
 
-// 判断谁赢谁输掉
+// 判断谁赢谁输
 export const judgeSuccess = (whitePieces: string[], blackPieces: string[], currentPieces: string) => {
     let result = {
         isVictory: false,
@@ -50,7 +50,7 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
     }
 
     const ruleNum = getGameRule()
-    
+
     const currentRuleNum = (party: string[]) => ruleNum.filter(
         (item) => {
             return item.includes(currentPieces)
@@ -84,3 +84,16 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
 
     return result
 }
+
+// 预判下一步应该下哪里
+export const nextStep = (whitePieces: string[], blackPieces: string[], type: string): string => {
+
+    return '0,0'
+}
+
+/**
+ * 优先级
+ * 一步 ： 下一步就胜利 -> 对方下一步就赢
+ * 两步： 下两步就胜利 -> 下两步必赢 -> 对方下两步必赢
+ *        下两步会被挡，对方下两步会被挡
+ */
