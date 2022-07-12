@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'umi';
 import { boardLength, piecesArr } from './drawing'
-import { getGameRule, judgeSuccess } from './rules';
+import { getGameRule, judgeSuccess, nextStep } from './rules';
 import styles from './index.module.less';
 
 const Board: React.FC = (props: any) => {
@@ -34,8 +34,8 @@ const Board: React.FC = (props: any) => {
       payload,
     })
   }
-  
-  //  下棋触发函数
+
+  // 下棋触发函数
   const playChess = (coordinate: string) => {
 
     if (isVictory || isStart) {
@@ -65,6 +65,7 @@ const Board: React.FC = (props: any) => {
     })
     // 设置当前棋子 当前棋子
     setCurrentPieces(coordinate)
+    nextStep(whitePieces, blackPieces,nextChessPiece)
   }
 
   return (
