@@ -37,7 +37,7 @@ const Board: React.FC = (props: any) => {
 
   // 下棋触发函数
   const playChess = (coordinate: string) => {
-
+    const newNextChessPiece = nextChessPiece === "white" ? "black" : 'white'
     if (isVictory || isStart) {
       return
     }
@@ -61,11 +61,11 @@ const Board: React.FC = (props: any) => {
     const newPieces = Array.from(new Set(chessPieces.data))
     update({
       [chessPieces['piece']]: newPieces,
-      nextChessPiece: nextChessPiece === "white" ? "black" : 'white'
+      nextChessPiece: newNextChessPiece
     })
     // 设置当前棋子 当前棋子
     setCurrentPieces(coordinate)
-    nextStep(whitePieces, blackPieces,nextChessPiece)
+    nextStep(whitePieces, blackPieces, nextChessPiece,newNextChessPiece)
   }
 
   return (
