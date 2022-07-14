@@ -42,16 +42,19 @@ export const getGameRule = () => {
     )
 }
 
+// 所有的赢法
+const allRuleNum = getGameRule()
+
 // 判断谁赢谁输
 export const judgeSuccess = (whitePieces: string[], blackPieces: string[], currentPieces: string) => {
+    // 胜利对象
     let result = {
         isVictory: false,
         winner: ''
     }
 
-    const ruleNum = getGameRule()
-
-    const currentRuleNum = (party: string[]) => ruleNum.filter(
+    // 当前所下棋子赢法
+    const currentRuleNum = (party: string[]) => allRuleNum.filter(
         (item) => {
             return item.includes(currentPieces)
         }
@@ -82,14 +85,55 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
         }
     }
 
-    return result
+    return result;
 }
 
 // 预判下一步应该下哪里
-export const nextStep = (whitePieces: string[], blackPieces: string[], type: string): string => {
+export const nextStep = (whitePieces: string[], blackPieces: string[], curPiece: string, nextPiece: string): string => {
+
+    const piecesObj = { whitePieces, blackPieces }
+
+    const result = allRuleNum.map(
+        (ruleItem: string[]) => {
+            let newItem: Array<string | null> = ruleItem
+            ruleItem.forEach(
+                (a: string, index: number) => {
+                    if (!newItem.length) return
+                    if (piecesObj[curPiece + 'Pieces'].includes(a)) {
+                        newItem = []
+                    }
+                    if (piecesObj[nextPiece + 'Pieces'].includes(a)) {
+                        newItem[index] = null
+                    }
+                }
+            )
+            return newItem.filter(s => s)
+        }
+    ).filter(s => s.length && s.length !== 5)
+
+    // // 按照优先顺序来排序
+    // result.sort((a, b) => a.length - b.length)
+
+    // let aaa = []
+    // result.forEach(
+    //     (item:Array<string | null> )=>{
+  
+    //     }
+    // )
+
+
+    console.log('result=========>', result,allRuleNum)
 
     return '0,0'
 }
+
+// gobang 算法
+/**
+ * 列出所有胜利的赢法
+ * 将列出的
+ */
+
+
 
 /**
  * 优先级
