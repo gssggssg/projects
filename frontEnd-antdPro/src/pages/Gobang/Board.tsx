@@ -6,7 +6,7 @@ import styles from './index.module.less';
 
 const Board: React.FC = (props: any) => {
 
-  const { whitePieces, blackPieces, nextChessPiece, isStart, VictoryInfo: { isVictory } } = props.gobang;
+  const { whitePieces, blackPieces, nextChessPiece, isStart, VictoryInfo: { isVictory }, allRuleNum } = props.gobang;
 
   // 当前棋子
   const [currentPieces, setCurrentPieces] = useState('')
@@ -14,14 +14,14 @@ const Board: React.FC = (props: any) => {
   // 初始化棋盘
   useEffect(
     () => {
-      getGameRule()
+      update({ allRuleNum: getGameRule() })
     }, []
   )
 
   // 每次下棋，触发检查函数
   useEffect(
     () => {
-      const result = judgeSuccess(whitePieces, blackPieces, currentPieces)
+      const result = judgeSuccess(whitePieces, blackPieces, currentPieces, allRuleNum)
       if (result.isVictory) {
         update({ VictoryInfo: result })
       }
@@ -36,8 +36,10 @@ const Board: React.FC = (props: any) => {
   }
 
   // 下棋触发函数
-  const playChess = (coordinate: string) => {
+  const playChess = (coordinate: string, type = 'player') => {
     const newNextChessPiece = nextChessPiece === "white" ? "black" : 'white'
+    const piecesObj = { whitePieces, blackPieces }
+
     if (isVictory || isStart) {
       return
     }
@@ -65,7 +67,13 @@ const Board: React.FC = (props: any) => {
     })
     // 设置当前棋子 当前棋子
     setCurrentPieces(coordinate)
-    nextStep(whitePieces, blackPieces, nextChessPiece,newNextChessPiece)
+
+    piecesObj[newNextChessPiece + 'Pieces'].push(nextStep(whitePieces, blackPieces, nextChessPiece, newNextChessPiece, allRuleNum))
+
+    update({
+      [newNextChessPiece + 'Pieces']: piecesObj[newNextChessPiece + 'Pieces'],
+      nextChessPiece: nextChessPiece
+    })
   }
 
   return (

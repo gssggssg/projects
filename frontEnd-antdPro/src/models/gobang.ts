@@ -24,6 +24,7 @@ const Model = {
             isVictory: false, // 是否游戏存在胜利
             winner: '',  // 胜利方
         },
+        allRuleNum: [],// 所有的胜利方式
     },
     effects: {
         // 登录
@@ -46,12 +47,13 @@ const Model = {
     },
     reducers: {
         update(state: any, { payload }: any) {
+            console.log(state,payload)
             return { ...state, ...payload }
         },
         // 重开游戏
         restart(state: any, { payload }: any) {
             return {
-                ...state, 
+                ...state,
                 whitePieces: [], // 白色棋子
                 blackPieces: [], // 黑色棋子
                 isStart: false, // 是否开始游戏

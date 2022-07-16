@@ -42,11 +42,9 @@ export const getGameRule = () => {
     )
 }
 
-// 所有的赢法
-const allRuleNum = getGameRule()
-
 // 判断谁赢谁输
-export const judgeSuccess = (whitePieces: string[], blackPieces: string[], currentPieces: string) => {
+export const judgeSuccess = (whitePieces: string[], blackPieces: string[], currentPieces: string, allRuleNum: string[][]) => {
+
     // 胜利对象
     let result = {
         isVictory: false,
@@ -89,40 +87,39 @@ export const judgeSuccess = (whitePieces: string[], blackPieces: string[], curre
 }
 
 // 预判下一步应该下哪里
-export const nextStep = (whitePieces: string[], blackPieces: string[], curPiece: string, nextPiece: string): string => {
-
+export const nextStep = (whitePieces: string[], blackPieces: string[], curPiece: string, nextPiece: string, allRuleNum: string[][]): string => {
     const piecesObj = { whitePieces, blackPieces }
-
     const result = allRuleNum.map(
         (ruleItem: string[]) => {
-            let newItem: Array<string | null> = ruleItem
-            ruleItem.forEach(
-                (a: string, index: number) => {
-                    if (!newItem.length) return
+            let isCan = true
+            const result = ruleItem.map(
+                (a: string) => {
                     if (piecesObj[curPiece + 'Pieces'].includes(a)) {
-                        newItem = []
+                        isCan = false
                     }
                     if (piecesObj[nextPiece + 'Pieces'].includes(a)) {
-                        newItem[index] = null
+                        return null
                     }
+                    return a
                 }
             )
-            return newItem.filter(s => s)
+            if (!isCan) return ruleItem
+            return result.filter(s => s)
         }
     ).filter(s => s.length && s.length !== 5)
 
-    // // 按照优先顺序来排序
-    // result.sort((a, b) => a.length - b.length)
+    // 按照优先顺序来排序
+    result.sort((a, b) => a.length - b.length)
 
-    // let aaa = []
-    // result.forEach(
-    //     (item:Array<string | null> )=>{
-  
-    //     }
-    // )
+    const ultimately = result.length ? result.filter(
+        (item: Array<string | null>) => {
+            return item.length === result[0].length
+        }
+    ).reduce((a, b) => a.concat(b)) : []
 
-
-    console.log('result=========>', result,allRuleNum)
+    if (ultimately.length) {
+        return ultimately[Math.floor(ultimately.length * Math.random())]!
+    }
 
     return '0,0'
 }
