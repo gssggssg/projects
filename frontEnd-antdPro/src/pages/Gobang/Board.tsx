@@ -6,10 +6,7 @@ import styles from './index.module.less';
 
 const Board: React.FC = (props: any) => {
 
-  const { whitePieces, blackPieces, nextChessPiece, isStart, VictoryInfo: { isVictory }, allRuleNum } = props.gobang;
-
-  // 当前棋子
-  const [currentPieces, setCurrentPieces] = useState('')
+  const { whitePieces, blackPieces, nextChessPiece, isStart, VictoryInfo: { isVictory }, allRuleNum, rival } = props.gobang;
 
   // 初始化棋盘
   useEffect(
@@ -18,21 +15,20 @@ const Board: React.FC = (props: any) => {
     }, []
   )
 
-  // 每次下棋，触发检查函数
-  useEffect(
-    () => {
-      const result = judgeSuccess(whitePieces, blackPieces, currentPieces, allRuleNum)
-      if (result.isVictory) {
-        update({ VictoryInfo: result })
-      }
-    }, [whitePieces, blackPieces, currentPieces]
-  )
-
   const update = (payload: Object) => {
     props.dispatch({
       type: "gobang/update",
       payload,
     })
+  }
+
+  // 每次下棋，触发检查函数
+  const check = (currentPieces: string): boolean => {
+    const result = judgeSuccess(whitePieces, blackPieces, currentPieces, allRuleNum)
+    if (result.isVictory) {
+      update({ VictoryInfo: result })
+    }
+    return result.isVictory
   }
 
   // 下棋触发函数
@@ -65,15 +61,18 @@ const Board: React.FC = (props: any) => {
       [chessPieces['piece']]: newPieces,
       nextChessPiece: newNextChessPiece
     })
-    // 设置当前棋子 当前棋子
-    setCurrentPieces(coordinate)
-
-    piecesObj[newNextChessPiece + 'Pieces'].push(nextStep(whitePieces, blackPieces, nextChessPiece, newNextChessPiece, allRuleNum))
-
-    update({
-      [newNextChessPiece + 'Pieces']: piecesObj[newNextChessPiece + 'Pieces'],
-      nextChessPiece: nextChessPiece
-    })
+    if (check(coordinate)) {
+      return
+    }
+    if (rival === 'robot') {
+      const rivalNextStep = nextStep(whitePieces, blackPieces, nextChessPiece, newNextChessPiece, allRuleNum)
+      piecesObj[newNextChessPiece + 'Pieces'].push(rivalNextStep)
+      update({
+        [newNextChessPiece + 'Pieces']: piecesObj[newNextChessPiece + 'Pieces'],
+        nextChessPiece: nextChessPiece
+      })
+      check(rivalNextStep)
+    }
   }
 
   return (

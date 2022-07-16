@@ -13,6 +13,12 @@ enum ColorPiece {
     black = "black",
 }
 
+// 对手
+enum Rival {
+    robot = "robot", // 机器人
+    player = "player", // 玩家
+}
+
 const Model = {
     namespace: 'gobang',
     state: {
@@ -25,6 +31,7 @@ const Model = {
             winner: '',  // 胜利方
         },
         allRuleNum: [],// 所有的胜利方式
+        rival: Rival.robot,// 对手
     },
     effects: {
         // 登录
@@ -47,7 +54,6 @@ const Model = {
     },
     reducers: {
         update(state: any, { payload }: any) {
-            console.log(state,payload)
             return { ...state, ...payload }
         },
         // 重开游戏

@@ -1,17 +1,11 @@
-import { piecesArr } from './drawing'
+import { flatPiecesArr } from './drawing'
 
 // 五子棋规规则相关
 
 // 生成所有胜利方式
 export const getGameRule = () => {
-    // 扁平化棋盘坐标数组
-    const flatPiecesArr = piecesArr().reduce(
-        (initValue: string[], value: string[]): string[] => {
-            return initValue.concat(value)
-        }, []
-    )
 
-    return flatPiecesArr.reduce(
+    return flatPiecesArr().reduce(
         (initValue: string[][], value: string) => {
             const row = value.split(',')[0] // 第几行
             const col = value.split(',')[1] // 第几列
@@ -115,13 +109,13 @@ export const nextStep = (whitePieces: string[], blackPieces: string[], curPiece:
         (item: Array<string | null>) => {
             return item.length === result[0].length
         }
-    ).reduce((a, b) => a.concat(b)) : []
+    ).reduce((a, b) => a.concat(b)) : flatPiecesArr().filter(
+        (item: string) => {
+            return !piecesObj[curPiece + 'Pieces'].includes(item)
+        }
+    )
 
-    if (ultimately.length) {
-        return ultimately[Math.floor(ultimately.length * Math.random())]!
-    }
-
-    return '0,0'
+    return ultimately[Math.floor(ultimately.length * Math.random())]!
 }
 
 // gobang 算法

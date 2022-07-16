@@ -9,7 +9,7 @@ export const boardLength = (): number[] => {
 }
 
 // 生成棋盘数组方法
-export const piecesArr = ():string[][] => {
+export const piecesArr = (): string[][] => {
     let result = [];
     for (let row = 0; row < 15; row++) {
         let rowArr = []
@@ -20,4 +20,13 @@ export const piecesArr = ():string[][] => {
 
     }
     return result;
+}
+
+// 生成棋盘数组方法
+export const flatPiecesArr = (): string[] => {
+    return piecesArr().reduce(
+        (initValue: string[], value: string[]): string[] => {
+            return initValue.concat(value)
+        }, []
+    )
 }
