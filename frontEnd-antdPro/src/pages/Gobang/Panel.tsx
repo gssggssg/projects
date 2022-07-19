@@ -25,6 +25,19 @@ const Panel: React.FC = (props: any) => {
           </div>
         </div>
       </div>
+      <ul className={styles.panelUl}>
+        {/* 倒计时 */}
+        <li>
+          <p>
+            倒计时
+          </p>
+          <div className={styles.countdown}>
+            <div className={styles.timeBox}>
+              <time>01:00</time>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 };

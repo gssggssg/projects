@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'umi';
 import { boardLength, piecesArr } from './drawing'
 import { getGameRule, judgeSuccess, nextStep } from './rules';
