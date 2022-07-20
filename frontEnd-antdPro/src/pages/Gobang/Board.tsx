@@ -36,7 +36,7 @@ const Board: React.FC = (props: any) => {
     const newNextChessPiece = nextChessPiece === "white" ? "black" : 'white'
     const piecesObj = { whitePieces, blackPieces }
 
-    if (isVictory || isStart) {
+    if (isVictory || !isStart) {
       return
     }
     let chessPieces: {
