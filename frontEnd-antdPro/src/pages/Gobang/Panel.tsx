@@ -7,17 +7,31 @@ import styles from "./index.module.less";
 const Panel: React.FC = (props: any) => {
   const { nextChessPiece, isStart } = props.gobang;
 
-  const [playTime, setPlayTime] = useState(60) // 下棋时间
+  const [playTime, setPlayTime] = useState(60) // 所有下棋时间
+  const [thinkingTime, setThinkingTime] = useState(0) // 每次思考时间
 
   useEffect(
     () => {
       let tick: NodeJS.Timeout
-      let time = 60
-      console.log('time')
+      let newTime = 0
       if (isStart) {
         tick = setInterval(() => {
-          setPlayTime(() => time - 1);
-          time--
+          setThinkingTime(() => newTime + 1);
+          newTime++
+        }, 1000);
+      }
+      return () => clearInterval(tick);
+    }, [isStart]
+  )
+
+  useEffect(
+    () => {
+      let tick: NodeJS.Timeout
+      let newTime = 60
+      if (isStart) {
+        tick = setInterval(() => {
+          setPlayTime(() => newTime - 1);
+          newTime--
         }, 1000);
       }
       return () => clearInterval(tick);
@@ -29,7 +43,6 @@ const Panel: React.FC = (props: any) => {
     white: "白色",
     black: "黑色",
   }
-
 
   const update = (payload: Object) => {
     props.dispatch({
@@ -63,6 +76,16 @@ const Panel: React.FC = (props: any) => {
           <div className={styles.countdown}>
             <div className={styles.timeBox}>
               <time>{playTime}</time>
+            </div>
+          </div>
+        </li>
+        <li>
+          <p>
+            游戏时间
+          </p>
+          <div className={styles.countdown}>
+            <div className={styles.timeBox}>
+              <time>{thinkingTime}</time>
             </div>
           </div>
         </li>

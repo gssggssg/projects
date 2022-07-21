@@ -26,13 +26,13 @@ const Board: React.FC = (props: any) => {
   const check = (currentPieces: string): boolean => {
     const result = judgeSuccess(whitePieces, blackPieces, currentPieces, allRuleNum)
     if (result.isVictory) {
-      update({ VictoryInfo: result })
+      update({ VictoryInfo: result, isStart: false })
     }
     return result.isVictory
   }
 
   // 下棋触发函数
-  const playChess = (coordinate: string, type = 'player') => {
+  const playChess = async (coordinate: string, type = 'player') => {
     const newNextChessPiece = nextChessPiece === "white" ? "black" : 'white'
     const piecesObj = { whitePieces, blackPieces }
 
@@ -57,7 +57,7 @@ const Board: React.FC = (props: any) => {
     chessPieces['data'].push(coordinate)
     // 去重
     const newPieces = Array.from(new Set(chessPieces.data))
-    update({
+    await update({
       [chessPieces['piece']]: newPieces,
       nextChessPiece: newNextChessPiece
     })
@@ -67,7 +67,7 @@ const Board: React.FC = (props: any) => {
     if (rival === 'robot') {
       const rivalNextStep = nextStep(whitePieces, blackPieces, nextChessPiece, newNextChessPiece, allRuleNum)
       piecesObj[newNextChessPiece + 'Pieces'].push(rivalNextStep)
-      update({
+      await update({
         [newNextChessPiece + 'Pieces']: piecesObj[newNextChessPiece + 'Pieces'],
         nextChessPiece: nextChessPiece
       })

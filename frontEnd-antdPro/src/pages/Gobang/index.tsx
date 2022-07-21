@@ -7,6 +7,14 @@ import styles from "./index.module.less";
 
 const Gobang: React.FC = (props: any) => {
   const { VictoryInfo: { isVictory, winner } } = props.gobang;
+
+  const startGame = (rival?: string) => {
+    props.dispatch({
+      type: "gobang/restart",
+      payload: { rival }
+    })
+  }
+
   return (
     <div className={styles.gobang}>
       <div className={styles.gobangBoard} >
@@ -30,8 +38,12 @@ const Gobang: React.FC = (props: any) => {
               <Descriptions.Item label="胜利方">{winner}</Descriptions.Item>
             </Descriptions>
           </div>
+          <div className={styles.buttonGroup}>
+            <Button onClick={() => startGame('player')}>双人对战</Button>
+            <Button onClick={() => startGame('robot')}>人机大战</Button>
+          </div>
           <div className={styles.popupFoot}>
-            <Button onClick={() => props.dispatch({ type: "gobang/restart" })}>重开</Button>
+            <Button onClick={() => startGame()}>重开</Button>
           </div>
         </div>
       </Modal>

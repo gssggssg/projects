@@ -67,6 +67,7 @@ const Model = {
                     isVictory: false, // 是否游戏存在胜利
                     winner: '',  // 胜利方
                 },
+                ...payload,
             }
         },
     }
