@@ -21,7 +21,8 @@ const Model = {
     state: {
         access_token: null,
         user_info: null,
-        user: {}
+        user: {},
+        token: null
     },
     effects: {
         // 登录
@@ -36,8 +37,9 @@ const Model = {
                     },
                 });
                 message.success('登录成功');
-                history.push('/');
                 sessionStorage.setItem('token', data?.data?.data?.token)
+                window.location.reload()
+                history.push('/');
             }
             data.data.code !== 1 && message.success('登录失败');
         },

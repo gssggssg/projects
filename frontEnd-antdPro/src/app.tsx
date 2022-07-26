@@ -25,8 +25,7 @@ export async function getInitialState(): Promise<{
 }> {
     const fetchUserInfo = async () => {
         try {
-            const token = sessionStorage.getItem('token')
-            const msg = await queryCurrentUser({ headers: { "Authorization": `Token ${token}` }, });
+            const msg = await queryCurrentUser();
             return msg.data;
         } catch (error) {
             history.push(loginPath);
