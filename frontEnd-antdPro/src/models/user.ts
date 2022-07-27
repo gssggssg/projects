@@ -38,8 +38,8 @@ const Model = {
                 });
                 message.success('登录成功');
                 sessionStorage.setItem('token', data?.data?.data?.token)
-                window.location.reload()
                 history.push('/');
+                window.location.reload()
             }
             data.data.code !== 1 && message.success('登录失败');
         },
