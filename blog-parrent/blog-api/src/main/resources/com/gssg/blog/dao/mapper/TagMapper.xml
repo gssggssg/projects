@@ -8,6 +8,6 @@
     <select id="findTagsByArticleId" parameterType="long" resultType="com.gssg.blog.dao.pajo.Tag">
         SELECT id,avatar,tag_name as tagName FROM ms_tag
         WHERE id in
-        (SELECT tag_id FROM ms_article_tag WHERE avatar_id=#{articleId})
+        (SELECT tag_id FROM ms_article_tag WHERE article_id=#{articleId})
     </select>
 </mapper>
