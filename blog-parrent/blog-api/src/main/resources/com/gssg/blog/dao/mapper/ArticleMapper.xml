@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis配置文件-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gssg.blog.dao.mapper.ArticleMapper">
+
+    <select id="listArchives" resultType="com.gssg.blog.dao.dos.Archives">
+        SELECT
+            YEAR(create_date) AS year,
+            MONTH(create_date) AS month,
+            COUNT(*) AS count
+        FROM
+            ms_article
+        GROUP BY
+            YEAR(create_date), MONTH(create_date)
+    </select>
+
+</mapper>
