@@ -4,10 +4,7 @@ import com.gssg.blog.service.ArticleService;
 import com.gssg.blog.vo.Result;
 import com.gssg.blog.vo.params.PageParams;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // json数据进行交互
 @RestController
@@ -25,5 +22,15 @@ public class ArticleController {
     @PostMapping
     public Result listArticle(@RequestBody PageParams pageParams){
         return articleService.listArticle(pageParams);
+    }
+
+    /**
+     * 首页 最热文章
+     * @return
+     */
+    @PostMapping("hot")
+    public Result hotArticle(){
+        int limit = 5;
+        return articleService.hotArticle(limit);
     }
 }
