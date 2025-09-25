@@ -4,6 +4,7 @@ import com.gssg.blog.dao.pajo.SysUser;
 
 public interface SysUserService {
 
-    SysUser findUserById(Long id);
+  SysUser findUserById(Long id);
 
+  SysUser findUser(String account, String password);
 }
