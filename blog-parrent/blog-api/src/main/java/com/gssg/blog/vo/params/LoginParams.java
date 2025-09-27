@@ -8,4 +8,6 @@ public class LoginParams {
   private String account;
 
   private String password;
+
+  private String nickname;
 }
