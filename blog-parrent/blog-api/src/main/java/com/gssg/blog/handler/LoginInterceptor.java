@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.gssg.blog.dao.pajo.SysUser;
 import com.gssg.blog.service.LoginService;
+import com.gssg.blog.utils.UserThreadLocal;
 import com.gssg.blog.vo.ErrorCode;
 import com.gssg.blog.vo.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +39,6 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
     String token = request.getHeader("Authorization");
 
-
     log.info("=================request start===========================");
     String requestURI = request.getRequestURI();
     log.info("request uri:{}",requestURI);
@@ -60,6 +61,13 @@ public class LoginInterceptor implements HandlerInterceptor {
       return false;
     }
     // 登录验证成功，放行
+    UserThreadLocal.put(sysUser);
     return true;
+  }
+
+  @Override
+  public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    // 如果不删除 ThreadLocal 中用完得信息，会有内存泄露得风险
+    UserThreadLocal.remove();
   }
 }
