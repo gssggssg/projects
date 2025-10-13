@@ -52,4 +52,14 @@ public class ArticleController {
     public Result listArchives(){
         return articleService.listArchives();
     }
+
+    /**
+     * 查看文章详情
+     * @param articleId
+     * @return
+     */
+    @PostMapping("view/{id}")
+    public Result findArticleById(@PathVariable("id") Long articleId){
+        return articleService.findArticleById(articleId);
+    }
 }

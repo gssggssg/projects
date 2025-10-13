@@ -32,4 +32,10 @@ public interface ArticleService {
    * @return
    */
   Result listArchives();
+
+  /**
+   * 查询文章
+   * @return
+   */
+  Result findArticleById(Long articleId);
 }
