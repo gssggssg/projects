@@ -7,10 +7,7 @@ import com.gssg.blog.dao.mapper.ArticleBodyMapper;
 import com.gssg.blog.dao.mapper.ArticleMapper;
 import com.gssg.blog.dao.pajo.Article;
 import com.gssg.blog.dao.pajo.ArticleBody;
-import com.gssg.blog.service.ArticleService;
-import com.gssg.blog.service.CategoryService;
-import com.gssg.blog.service.TagService;
-import com.gssg.blog.service.SysUserService;
+import com.gssg.blog.service.*;
 import com.gssg.blog.vo.ArticleBodyVo;
 import com.gssg.blog.vo.ArticleVo;
 import com.gssg.blog.vo.CategoryVo;
@@ -41,6 +38,9 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Autowired
   private CategoryService categoryService;
+
+  @Autowired
+  private ThreadService threadService;
 
   @Override
   public Result listArticle(PageParams pageParams) {
@@ -105,10 +105,14 @@ public class ArticleServiceImpl implements ArticleService {
      * 1. 根据ID查询 文章信息
      * 2. 根据bodyId和categoryId去做关联查询
      */
-
-    ArticleVo articleVo = new ArticleVo();
     Article article = articleMapper.selectById(articleId);
     ArticleVo copy = copy(article, true, true, true, true);
+
+    // 查看完文章了，新增阅读数，有没有问题呢？
+    // 查看完文章之后，本应该直接返回数据了，这时候做了一个更新操作，更新时加写所，阻塞其他的都读操作，性能就会比较低
+    // 更新 增加了此次接口的 耗时 如果一旦更新出现问题，不能影响 查看文章的操作
+    // 线程池 可以把更新操作 扔到线程池中取执行，和主线程就不相关了
+    threadService.updateArticleViewCount(articleMapper, article);
     return Result.success(copy);
   }
 
