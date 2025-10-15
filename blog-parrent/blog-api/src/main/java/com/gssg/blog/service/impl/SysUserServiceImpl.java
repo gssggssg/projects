@@ -8,6 +8,8 @@ import com.gssg.blog.service.SysUserService;
 import com.gssg.blog.vo.ErrorCode;
 import com.gssg.blog.vo.LoginUserVo;
 import com.gssg.blog.vo.Result;
+import com.gssg.blog.vo.UserVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,21 @@ public class SysUserServiceImpl implements SysUserService {
 
   @Autowired
   private LoginService loginService;
+
+  @Override
+  public UserVo findUserVoById(Long id) {
+    SysUser sysUser = sysUserMapper.selectById(id);
+    if (sysUser == null) {
+      sysUser = new SysUser();
+      sysUser.setId(1L);
+      sysUser.setAvatar("/static/img/logo.b3a48c0.png");
+      sysUser.setNickname("GSSG");
+    }
+    UserVo userVo = new UserVo();
+    userVo.setId(sysUser.getId());
+    BeanUtils.copyProperties(sysUser, userVo);
+    return userVo;
+  }
 
   @Override
   public SysUser findUserById(Long id) {

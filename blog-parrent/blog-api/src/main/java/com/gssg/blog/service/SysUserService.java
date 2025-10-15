@@ -2,8 +2,11 @@ package com.gssg.blog.service;
 
 import com.gssg.blog.dao.pajo.SysUser;
 import com.gssg.blog.vo.Result;
+import com.gssg.blog.vo.UserVo;
 
 public interface SysUserService {
+
+  UserVo findUserVoById(Long id);
 
   SysUser findUserById(Long id);
 
