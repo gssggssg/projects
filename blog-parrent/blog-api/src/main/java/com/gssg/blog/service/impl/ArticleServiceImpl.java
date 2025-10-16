@@ -5,13 +5,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gssg.blog.dao.dos.Archives;
 import com.gssg.blog.dao.mapper.ArticleBodyMapper;
 import com.gssg.blog.dao.mapper.ArticleMapper;
+import com.gssg.blog.dao.mapper.ArticleTagMapper;
 import com.gssg.blog.dao.pajo.Article;
 import com.gssg.blog.dao.pajo.ArticleBody;
+import com.gssg.blog.dao.pajo.ArticleTag;
+import com.gssg.blog.dao.pajo.SysUser;
 import com.gssg.blog.service.*;
-import com.gssg.blog.vo.ArticleBodyVo;
-import com.gssg.blog.vo.ArticleVo;
-import com.gssg.blog.vo.CategoryVo;
-import com.gssg.blog.vo.Result;
+import com.gssg.blog.utils.UserThreadLocal;
+import com.gssg.blog.vo.*;
+import com.gssg.blog.vo.params.ArticleParam;
 import com.gssg.blog.vo.params.PageParams;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -41,6 +45,9 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Autowired
   private ThreadService threadService;
+
+  @Autowired
+  private ArticleTagMapper articleTagMapper;
 
   @Override
   public Result listArticle(PageParams pageParams) {
@@ -114,6 +121,49 @@ public class ArticleServiceImpl implements ArticleService {
     // 线程池 可以把更新操作 扔到线程池中取执行，和主线程就不相关了
     threadService.updateArticleViewCount(articleMapper, article);
     return Result.success(copy);
+  }
+
+  @Override
+  public Result publish(ArticleParam articleParam) {
+    // 此接口 要加入到登录拦截中
+    SysUser sysUser = UserThreadLocal.get();
+    /**
+     * 1. 发布文章 目的 构建Article对象
+     * 2. 作者id 当前登录用户
+     * 3. 标签  要将标签加入到关联列表当中
+     * 4. body 内容存储 article bodyid
+     */
+    Article article = new Article();
+    article.setAuthorId(sysUser.getId());
+    article.setWeight(Article.Article_Common);
+    article.setViewCounts(0);
+    article.setTitle(articleParam.getTitle());
+    article.setSummary(articleParam.getSummary());
+    article.setCommentCounts(0);
+    article.setCategoryId(articleParam.getCategory().getId());
+    // 插入之后 会生成一个文章id
+    articleMapper.insert(article);
+    // tag
+    List<TagVo> tags = articleParam.getTags();
+    if(tags != null){
+      Long articleId = article.getId();
+      for (TagVo tag : tags) {
+        ArticleTag articleTag = new ArticleTag();
+        articleTag.setTagId(tag.getId());
+        articleTag.setArticleId(articleId);
+        articleTagMapper.insert(articleTag);
+      }
+    }
+    // body
+    ArticleBody articleBody = new ArticleBody();
+    articleBody.setArticleId(article.getId());
+    articleBody.setContent(articleParam.getBody().getContent());
+    articleBody.setContentHtml(articleParam.getBody().getContentHtml());
+    articleBodyMapper.insert(articleBody);
+    article.setBodyId(articleBody.getId());
+    Map<String, String> map = new HashMap<>();
+    map.put("id",article.getId().toString());
+    return Result.success(map);
   }
 
   private List<ArticleVo> copyList(List<Article> records, boolean isTag, boolean isAuthor) {
