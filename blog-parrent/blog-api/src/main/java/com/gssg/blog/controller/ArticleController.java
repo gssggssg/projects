@@ -1,5 +1,6 @@
 package com.gssg.blog.controller;
 
+import com.gssg.blog.common.aop.LogAnnotation;
 import com.gssg.blog.service.ArticleService;
 import com.gssg.blog.vo.Result;
 import com.gssg.blog.vo.params.ArticleParam;
@@ -20,6 +21,7 @@ public class ArticleController {
      * @param pageParams
      * @return Result
      */
+    @LogAnnotation(module = "文章", operator = "获取文章列表")
     @PostMapping
     public Result listArticle(@RequestBody PageParams pageParams){
         return articleService.listArticle(pageParams);
