@@ -5,14 +5,7 @@
 <mapper namespace="com.gssg.blog.dao.mapper.ArticleMapper">
 
     <select id="listArchives" resultType="com.gssg.blog.dao.dos.Archives">
-        SELECT
-            YEAR(create_date) AS year,
-            MONTH(create_date) AS month,
-            COUNT(*) AS count
-        FROM
-            ms_article
-        GROUP BY
-            YEAR(create_date), MONTH(create_date)
+        SELECT FROM_UNIXTIME(create_date / 1000, '%y') AS year, FROM_UNIXTIME(create_date / 1000, '%m') AS MONTH, COUNT(*) AS count FROM ms_article GROUP BY year, month
     </select>
 
 </mapper>
