@@ -20,50 +20,58 @@ import java.util.List;
 @Service
 public class TagServiceImpl implements TagService {
 
-    @Autowired
-    private TagMapper tagMapper;
+  @Autowired
+  private TagMapper tagMapper;
 
-    public TagVo copy(Tag tag){
-        TagVo tagVo = new TagVo();
-        BeanUtils.copyProperties(tag,tagVo);
-        return tagVo;
+  public TagVo copy(Tag tag) {
+    TagVo tagVo = new TagVo();
+    BeanUtils.copyProperties(tag, tagVo);
+    return tagVo;
+  }
+
+  public List<TagVo> copyList(List<Tag> tagList) {
+    List<TagVo> tagVoList = new ArrayList<>();
+    for (Tag tag : tagList) {
+      tagVoList.add(copy(tag));
+    }
+    return tagVoList;
+  }
+
+  @Override
+  public List<TagVo> findTagsByArticleId(Long articleId) {
+    // mybatis plus 无法进行多表查询
+    List<Tag> tags = tagMapper.findTagsByArticleId(articleId);
+    return copyList(tags);
+  }
+
+  @Override
+  public Result hots(int limit) {
+    /**
+     * 1. 标签所拥有的文章数量做多 最热标签
+     * 2. 查询 根据tag_id 分组计数，从大到小排列 取前limit
+     */
+    List<Long> tagIds = tagMapper.findHotsTagIds(limit);
+
+    if (CollectionUtils.isEmpty(tagIds)) {
+      return Result.success(Collections.emptyList());
     }
 
-    public List<TagVo> copyList(List<Tag> tagList){
-        List<TagVo> tagVoList = new ArrayList<>();
-        for (Tag tag : tagList) {
-            tagVoList.add(copy(tag));
-        }
-        return tagVoList;
-    }
+    List<Tag> tagList = tagMapper.findTagsByTagIds(tagIds);
 
-    @Override
-    public List<TagVo> findTagsByArticleId(Long articleId) {
-        // mybatis plus 无法进行多表查询
-        List<Tag> tags = tagMapper.findTagsByArticleId(articleId);
-        return copyList(tags);
-    }
+    return Result.success(tagList);
+  }
 
-    @Override
-    public Result hots(int limit) {
-        /**
-         * 1. 标签所拥有的文章数量做多 最热标签
-         * 2. 查询 根据tag_id 分组计数，从大到小排列 取前limit
-         */
-        List<Long> tagIds = tagMapper.findHotsTagIds(limit);
+  @Override
+  public Result findAll() {
+    LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
+    queryWrapper.select(Tag::getId, Tag::getTagName);
+    List<Tag> tags = tagMapper.selectList(queryWrapper);
+    return Result.success(copyList(tags));
+  }
 
-        if(CollectionUtils.isEmpty(tagIds)){
-            return Result.success(Collections.emptyList());
-        }
-
-        List<Tag> tagList = tagMapper.findTagsByTagIds(tagIds);
-
-        return Result.success(tagList);
-    }
-
-    @Override
-    public Result findAll() {
-        List<Tag> tagList = tagMapper.selectList(new LambdaQueryWrapper<>());
-        return Result.success(copyList(tagList));
-    }
+  @Override
+  public Result findAllDetail() {
+    List<Tag> tagList = tagMapper.selectList(new LambdaQueryWrapper<>());
+    return Result.success(copyList(tagList));
+  }
 }
