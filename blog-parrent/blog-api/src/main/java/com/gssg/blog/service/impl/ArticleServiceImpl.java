@@ -51,40 +51,55 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Override
   public Result listArticle(PageParams pageParams) {
-    /**
-     * 分页查询 article 数据库表
-     */
     Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
-    LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-    if(pageParams.getCategoryId() != null){
-      // and category_id=#{categoryId}
-      queryWrapper.eq(Article::getCategoryId, pageParams.getCategoryId());
-    }
-    List<Long> articleIdList = new ArrayList<>();
-    if(pageParams.getTagId() != null){
-      // 加入标签 条件查询
-      // article表中 并没有tag字段 一篇文章 有多个标签
-      // article_tag article_id 1 : n tag_id
-      LambdaQueryWrapper<ArticleTag> articleTagQueryWrapper = new LambdaQueryWrapper<>();
-      articleTagQueryWrapper.eq(ArticleTag::getTagId, pageParams.getTagId());
-      List<ArticleTag> articleTags = articleTagMapper.selectList(articleTagQueryWrapper);
-      for(ArticleTag articleTag : articleTags){
-        articleIdList.add(articleTag.getArticleId());
-      }
-      if(!articleIdList.isEmpty()){
-        // and id in(1,2,3)
-        queryWrapper.in(Article::getId,articleIdList);
-      }
-    }
-    // 是否置顶进行排序
-    // order by create_date desc
-    queryWrapper.orderByDesc(Article::getWeight, Article::getCategoryId);
-    Page<Article> articlePage = articleMapper.selectPage(page, queryWrapper);
-    List<Article> records = articlePage.getRecords();
-    // 能直接返回list吗？很明显不能
-    List<ArticleVo> articleVoList = copyList(records, true, true);
-    return Result.success(articleVoList);
+    articleMapper.listArchive(
+      page,
+      pageParams.getCategoryId(),
+      pageParams.getTagId(),
+      pageParams.getYear(),
+      pageParams.getMonth()
+    );
+
+    List<Article> articles = page.getRecords();
+    return Result.success(copyList(articles, true, true));
   }
+
+//  @Override
+//  public Result listArticle(PageParams pageParams) {
+//    /**
+//     * 分页查询 article 数据库表
+//     */
+//    Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
+//    LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+//    if(pageParams.getCategoryId() != null){
+//      // and category_id=#{categoryId}
+//      queryWrapper.eq(Article::getCategoryId, pageParams.getCategoryId());
+//    }
+//    List<Long> articleIdList = new ArrayList<>();
+//    if(pageParams.getTagId() != null){
+//      // 加入标签 条件查询
+//      // article表中 并没有tag字段 一篇文章 有多个标签
+//      // article_tag article_id 1 : n tag_id
+//      LambdaQueryWrapper<ArticleTag> articleTagQueryWrapper = new LambdaQueryWrapper<>();
+//      articleTagQueryWrapper.eq(ArticleTag::getTagId, pageParams.getTagId());
+//      List<ArticleTag> articleTags = articleTagMapper.selectList(articleTagQueryWrapper);
+//      for(ArticleTag articleTag : articleTags){
+//        articleIdList.add(articleTag.getArticleId());
+//      }
+//      if(!articleIdList.isEmpty()){
+//        // and id in(1,2,3)
+//        queryWrapper.in(Article::getId,articleIdList);
+//      }
+//    }
+//    // 是否置顶进行排序
+//    // order by create_date desc
+//    queryWrapper.orderByDesc(Article::getWeight, Article::getCategoryId);
+//    Page<Article> articlePage = articleMapper.selectPage(page, queryWrapper);
+//    List<Article> records = articlePage.getRecords();
+//    // 能直接返回list吗？很明显不能
+//    List<ArticleVo> articleVoList = copyList(records, true, true);
+//    return Result.success(articleVoList);
+//  }
 
   /**
    * 最热文章
@@ -165,7 +180,7 @@ public class ArticleServiceImpl implements ArticleService {
     articleMapper.insert(article);
     // tag
     List<TagVo> tags = articleParam.getTags();
-    if(tags != null){
+    if (tags != null) {
       Long articleId = article.getId();
       for (TagVo tag : tags) {
         ArticleTag articleTag = new ArticleTag();
@@ -182,7 +197,7 @@ public class ArticleServiceImpl implements ArticleService {
     articleBodyMapper.insert(articleBody);
     article.setBodyId(articleBody.getId());
     Map<String, String> map = new HashMap<>();
-    map.put("id",article.getId().toString());
+    map.put("id", article.getId().toString());
     return Result.success(map);
   }
 
