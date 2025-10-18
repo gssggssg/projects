@@ -2,7 +2,6 @@ package com.gssg.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gssg.blog.dao.mapper.TagMapper;
-import com.gssg.blog.dao.pajo.Category;
 import com.gssg.blog.dao.pajo.Tag;
 import com.gssg.blog.service.TagService;
 import com.gssg.blog.vo.Result;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -73,5 +71,11 @@ public class TagServiceImpl implements TagService {
   public Result findAllDetail() {
     List<Tag> tagList = tagMapper.selectList(new LambdaQueryWrapper<>());
     return Result.success(copyList(tagList));
+  }
+
+  @Override
+  public Result findDetailById(Long id) {
+    Tag tag = tagMapper.selectById(id);
+    return Result.success(copy(tag));
   }
 }
